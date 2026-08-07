@@ -15,6 +15,8 @@ export default function StrategyPage() {
       <PageHero
         title="กลยุทธ์"
         description="กลยุทธ์และแผนการดำเนินงานของสถาบันฯ"
+        image="/images/about/strategy-hero.webp"
+        imageAlt="มือกำลังเดินหมากรุกแก้วที่มีลูกโลกอยู่บนยอด สื่อถึงการวางกลยุทธ์เพื่อโลก"
         breadcrumb={[
           { label: "เกี่ยวกับเรา" },
           { label: "กลยุทธ์", href: "/about/strategy" },

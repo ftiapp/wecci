@@ -43,10 +43,10 @@ export function PageHero({
         priority
         zoom={zoom}
         /* แบนเนอร์เต็มจอต้องคมที่สุด ไม่ยอมให้ขั้นตอน optimize บีบซ้ำอีก */
-        quality={100}
+        quality={82}
       />
 
-      <Container className="relative z-10 pb-16 pt-40 sm:pb-20">
+      <Container className="relative z-10 pb-12 pt-32 sm:pb-20 sm:pt-40">
         <HeroPanel className="max-w-4xl 2xl:max-w-5xl">
         <nav aria-label="เส้นทางนำทาง" className="mb-5 text-xs text-slate-200">
           <ol className="flex flex-wrap items-center gap-2">

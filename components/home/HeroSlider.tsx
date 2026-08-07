@@ -56,14 +56,14 @@ export function HeroSlider() {
             /* สไลด์แรกคือ LCP ที่เหลือโหลดตามทันทีเพื่อให้พร้อมก่อนถูกสลับไปหา */
             priority={i === 0}
             loading={i === 0 ? undefined : "eager"}
-            quality={100}
+            quality={82}
             /* ซูมเฉพาะสไลด์ที่แสดงอยู่ — สลับคลาสทำให้อนิเมชันเริ่มใหม่โดยไม่ต้อง remount */
             zoom={i === index}
           />
         </div>
       ))}
 
-      <Container className="relative z-10 pb-16 pt-40 sm:pb-20">
+      <Container className="relative z-10 pb-12 pt-32 sm:pb-20 sm:pt-40">
         <HeroPanel key={slide.id} className="wecci-fade-up max-w-4xl text-white 2xl:max-w-5xl">
           {slide.eyebrow && (
             <p className="mb-4 inline-block rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold backdrop-blur-sm sm:text-sm">
@@ -87,7 +87,7 @@ export function HeroSlider() {
         </HeroPanel>
 
         <div
-          className="mt-12 flex items-center gap-3"
+          className="mt-8 flex items-center gap-3 sm:mt-12"
           role="tablist"
           aria-label="เลือกแบนเนอร์"
         >

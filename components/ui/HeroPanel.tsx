@@ -14,8 +14,12 @@ export function HeroPanel({
 }) {
   return (
     <div className={`relative ${className}`}>
+      {/*
+        มือถือ: ข้อความกินเต็มความกว้าง ถ้าไล่จางไปทางขวาตัวอักษรฝั่งขวาจะลอยอยู่บนภาพจนอ่านไม่ออก
+        จึงใช้แถบทึบพาดเต็มจอแทน แล้วค่อยเปลี่ยนเป็นแบบไล่จางตั้งแต่ sm ขึ้นไปที่ข้อความไม่เต็มจอแล้ว
+      */}
       <div
-        className="absolute -bottom-10 -left-[50vw] -top-10 right-[-8%] rounded-r-[2.5rem] bg-gradient-to-r from-wecci-forest/92 via-wecci-blue/62 via-72% to-transparent sm:right-[-14%]"
+        className="absolute -bottom-6 -left-[50vw] -right-[50vw] -top-6 bg-wecci-forest/88 sm:-bottom-10 sm:-top-10 sm:right-[-14%] sm:rounded-r-[2.5rem] sm:bg-gradient-to-r sm:from-wecci-forest/92 sm:via-wecci-blue/62 sm:via-72% sm:to-transparent"
         aria-hidden
       />
       <div className="relative">{children}</div>

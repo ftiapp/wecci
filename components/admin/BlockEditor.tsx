@@ -127,7 +127,7 @@ function AddBlockMenu({ onPick }: { onPick: (type: BlockType) => void }) {
 
       {open && (
         <div className="absolute left-1/2 top-full z-20 mt-2 w-72 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl">
-          <ul className="grid grid-cols-2 gap-1">
+          <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
             {blockOrder.map((type) => (
               <li key={type}>
                 <button
