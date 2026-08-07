@@ -70,7 +70,8 @@ export function Band({
 
       {image && (
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <Image src={image} alt="" fill sizes="100vw" className="object-cover" priority />
+          {/* พื้นหลังตกแต่งของบล็อกกลางหน้า ไม่ต้อง preload ให้ไปแย่งคิวกับแบนเนอร์ */}
+          <Image src={image} alt="" fill sizes="100vw" quality={75} className="object-cover" />
           {/* ฝ้าขาว — ภาพยังเห็นเป็นบรรยากาศ แต่ตัวอักษรสีเข้มยังอ่านสบาย */}
           <div
             className={`absolute inset-0 bg-gradient-to-b ${

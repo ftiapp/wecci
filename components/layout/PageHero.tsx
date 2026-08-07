@@ -14,6 +14,7 @@ export function PageHero({
   breadcrumb = [],
   image,
   imageAlt = "",
+  focus,
   gradient = "from-wecci-navy via-wecci-blue to-wecci-aqua",
   /* ข้อความมีแถบสีรองของตัวเองแล้ว ตรงนี้จึงเหลือแค่เงาบาง ๆ ไม่ย้อมสีรูป */
   overlay = "bg-gradient-to-t from-black/30 via-transparent to-transparent",
@@ -27,6 +28,8 @@ export function PageHero({
   /** ภาพหัวหน้าเพจ วางไฟล์ที่ public/images/page/ */
   image?: string;
   imageAlt?: string;
+  /** จุดโฟกัสของภาพแบบ object-position เช่น "68% 45%" ใส่เมื่อประธานของภาพไม่ได้อยู่กลาง */
+  focus?: string;
   gradient?: string;
   /** ชั้นสีทับภาพ ปรับได้ตามความสว่างของภาพแต่ละหน้า */
   overlay?: string;
@@ -40,10 +43,15 @@ export function PageHero({
         alt={imageAlt}
         gradient={gradient}
         overlay={overlay}
-        priority
+        preload
         zoom={zoom}
-        /* แบนเนอร์เต็มจอต้องคมที่สุด ไม่ยอมให้ขั้นตอน optimize บีบซ้ำอีก */
-        quality={82}
+        focus={focus}
+        /*
+          ต้องเป็นค่าที่มีใน images.qualities ไม่งั้น Next 16 จะปัดให้เงียบ ๆ
+          (เดิมส่ง 82 แล้วโดนปัดขึ้นเป็น 88) แบนเนอร์เต็มจอโดน ken burns ซูมเข้าด้วย
+          จึงใช้ 85 ไม่ลดลงไปถึง 75 เพราะจะเห็นรอยบีบอัดบนพื้นเรียบ ๆ อย่างท้องฟ้า
+        */
+        quality={85}
       />
 
       <Container className="relative z-10 pb-12 pt-32 sm:pb-20 sm:pt-40">

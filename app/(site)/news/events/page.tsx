@@ -26,8 +26,8 @@ export default async function EventsPage() {
           { label: "ข่าวสาร" },
           { label: "ปฏิทินกิจกรรม", href: "/news/events" },
         ]}
-        image="/images/news/reading-v2.webp"
-        imageAlt="ผู้อ่านข่าวสารของสถาบันผ่านแท็บเล็ต"
+        // ยังไม่มีภาพหัวหน้านี้ — พาธเดิม /images/news/reading-v2.webp ชี้ไปที่ไฟล์ที่ไม่มีอยู่
+        // ปล่อยไว้เท่ากับยิงคำขอย่อภาพที่ล้มเหลวทุกครั้งที่เปิดหน้า จึงถอดออกและใช้พื้นไล่เฉดแทน
       />
 
       <Band tone="sky" pattern="windmill">

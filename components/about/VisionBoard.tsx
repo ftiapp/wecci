@@ -83,7 +83,7 @@ export function VisionBoard({
             alt={period.title}
             width={680}
             height={350}
-            priority
+            sizes="320px"
             className="mx-auto h-16 w-auto object-contain sm:h-20 2xl:h-24 lg:mx-0"
           />
           {/* ปีวาระ — ไล่เฉดสีแบรนด์ในตัวอักษร แล้วมีขีดหนาใต้เลข */}
@@ -171,9 +171,9 @@ export function VisionBoard({
               width={991}
               height={1385}
               sizes="(min-width: 1024px) 60rem, 30rem"
-              quality={90}
+              // ต้องเป็นค่าที่มีใน images.qualities ไม่งั้นโดนปัดให้เงียบ ๆ (เดิมส่ง 90 โดนปัดเป็น 100)
+              quality={85}
               className="relative h-auto w-full min-h-0 object-contain drop-shadow-xl lg:h-full lg:w-auto"
-              priority
             />
 
             {/*

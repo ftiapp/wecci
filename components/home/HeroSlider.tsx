@@ -12,6 +12,22 @@ const INTERVAL_MS = 7000;
 export function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  /*
+    สไลด์แรกคือภาพที่ผู้ใช้เห็นจริง ต้องได้แบนด์วิดท์และคิวย่อภาพฝั่งเซิร์ฟเวอร์
+    ไปทั้งหมดก่อน ถ้าปล่อยให้อีกสองใบโหลดพร้อมกันตั้งแต่แรก ทั้งสามจะแย่งกัน
+    แล้วใบที่คนกำลังมองกลับมาช้าที่สุด จึงรอจนหน้าโหลดเสร็จค่อยตามเก็บที่เหลือ
+  */
+  const [preloadRest, setPreloadRest] = useState(false);
+
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      setPreloadRest(true);
+      return;
+    }
+    const onLoad = () => setPreloadRest(true);
+    window.addEventListener("load", onLoad);
+    return () => window.removeEventListener("load", onLoad);
+  }, []);
 
   useEffect(() => {
     if (paused) return;
@@ -48,15 +64,27 @@ export function HeroSlider() {
           aria-hidden={i !== index}
         >
           <MediaBackdrop
-            src={item.image}
+            /*
+              ตัดพาธภาพออกจนกว่าจะถึงคิว — สไลด์ที่เหลือซ้อนอยู่กลางจอทั้งที่ยัง
+              ไม่ถูกแสดง loading="lazy" จึงไม่ช่วยอะไร เบราว์เซอร์ถือว่าอยู่ในสายตา
+              และดึงทันที ต้องไม่ส่ง src ให้เลยถึงจะเลื่อนการโหลดได้จริง
+              MediaBackdrop จะถอยไปใช้พื้นไล่เฉดของสไลด์นั้นระหว่างรอ
+            */
+            src={i === 0 || preloadRest ? item.image : undefined}
             alt={item.imageAlt ?? ""}
             gradient={item.gradient}
             /* ข้อความมีแถบสีรองของตัวเองแล้ว ตรงนี้จึงเหลือแค่เงาบาง ๆ กันปุ่มด้านล่างจม */
             overlay={item.overlay ?? "bg-gradient-to-t from-black/30 via-transparent to-transparent"}
-            /* สไลด์แรกคือ LCP ที่เหลือโหลดตามทันทีเพื่อให้พร้อมก่อนถูกสลับไปหา */
-            priority={i === 0}
-            loading={i === 0 ? undefined : "eager"}
-            quality={82}
+            focus={item.focus}
+            /*
+              ใบแรกเป็น LCP จึง preload ให้เบราว์เซอร์เริ่มดึงตั้งแต่อ่านเจอใน head
+              ที่เหลือรอจนหน้าโหลดเสร็จ (preloadRest) แล้วค่อยดึง — ยังทันก่อนสไลด์
+              จะเลื่อนที่ 7 วินาที และไม่ไปแย่งช่วงที่ใบแรกกำลังโหลด
+            */
+            preload={i === 0}
+            loading="eager"
+            /* ต้องเป็นค่าที่มีใน images.qualities ของ next.config ไม่งั้นโดนปัดให้เงียบ ๆ */
+            quality={85}
             /* ซูมเฉพาะสไลด์ที่แสดงอยู่ — สลับคลาสทำให้อนิเมชันเริ่มใหม่โดยไม่ต้อง remount */
             zoom={i === index}
           />

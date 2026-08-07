@@ -16,6 +16,7 @@ export default function StrategyPage() {
         title="กลยุทธ์"
         description="กลยุทธ์และแผนการดำเนินงานของสถาบันฯ"
         image="/images/about/strategy-hero.webp"
+        focus="40% 42%"
         imageAlt="มือกำลังเดินหมากรุกแก้วที่มีลูกโลกอยู่บนยอด สื่อถึงการวางกลยุทธ์เพื่อโลก"
         breadcrumb={[
           { label: "เกี่ยวกับเรา" },

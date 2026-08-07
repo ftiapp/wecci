@@ -25,7 +25,7 @@ export default async function AdminLoginPage({
               alt={siteConfig.shortName}
               width={6809}
               height={3510}
-              priority
+              sizes="224px"
               className="h-12 w-auto"
             />
           </span>

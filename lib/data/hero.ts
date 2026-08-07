@@ -11,6 +11,11 @@ export type HeroSlide = {
   /** ภาพพื้นหลัง วางไฟล์ไว้ที่ public/ แล้วใส่พาธเป็น "/xxx.png" */
   image?: string;
   imageAlt?: string;
+  /**
+   * จุดโฟกัสของภาพแบบ object-position เช่น "68% 45%"
+   * จำเป็นเมื่อประธานของภาพไม่ได้อยู่กึ่งกลาง เพราะกรอบบนมือถือครอบด้านข้างทิ้งเยอะ
+   */
+  focus?: string;
   /** ชั้นสีทับภาพ ปรับแยกรายสไลด์เพราะแต่ละภาพสว่างไม่เท่ากัน */
   overlay?: string;
 };
@@ -25,6 +30,8 @@ export const heroSlides: HeroSlide[] = [
     ctaHref: "/contact",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/sprout-v4.webp",
+    /* ต้นกล้ากับหยดน้ำอยู่ค่อนไปทางขวา และยกขึ้นเหนือข้อความที่อยู่ชิดล่าง */
+    focus: "62% 45%",
     imageAlt: "ต้นกล้าเขียวงอกจากหยดน้ำ สื่อถึงการใช้ทรัพยากรน้ำอย่างยั่งยืน",
   },
   {
@@ -36,6 +43,8 @@ export const heroSlides: HeroSlide[] = [
     ctaHref: "/services/cfo-cfp",
     gradient: "from-wecci-navy via-wecci-blue to-wecci-teal",
     image: "/images/hero/service-v4.webp",
+    /* มือที่รองน้ำอยู่ค่อนไปทางซ้าย ถ้ายึดกลางภาพจะเหลือแต่ผิวน้ำเปล่า ๆ */
+    focus: "32% 45%",
     imageAlt: "มือรองน้ำใสไหลลงสู่ผิวน้ำ มีใบไม้เขียวและกังหันลมอยู่เบื้องหลัง สื่อถึงการจัดการน้ำและพลังงานสะอาด",
   },
   {
@@ -47,6 +56,8 @@ export const heroSlides: HeroSlide[] = [
     ctaHref: "/about/institute",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/vision-v3.webp",
+    /* หยดน้ำรูปโลกอยู่ค่อนไปทางขวา */
+    focus: "66% 42%",
     imageAlt: "หยดน้ำบนใบไม้เขียวที่สะท้อนภาพโลกอยู่ข้างใน สื่อถึงการดูแลทรัพยากรน้ำของโลก",
   },
 ];

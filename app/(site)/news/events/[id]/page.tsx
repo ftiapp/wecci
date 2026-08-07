@@ -123,7 +123,7 @@ export default async function EventDetailPage({
                     fill
                     sizes="256px"
                     className="object-cover"
-                    priority
+                    preload
                   />
                 ) : (
                   // ยังไม่ได้อัปโหลดโปสเตอร์ — แสดงวันที่ตัวใหญ่แทนช่องว่าง

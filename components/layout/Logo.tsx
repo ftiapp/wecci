@@ -17,7 +17,13 @@ export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
         alt={`${siteConfig.parentEn} — ${siteConfig.shortName}`}
         width={6809}
         height={3510}
-        priority
+        /*
+          ไฟล์ต้นทางกว้าง 6809 แต่แสดงจริงแค่ราว 110px
+          ถ้าไม่บอก sizes เบราว์เซอร์จะเดาว่ากว้างเท่าจอแล้วไปหยิบตัว 1920 มาใช้
+          กินแบนด์วิดท์และเวลาย่อภาพฝั่งเซิร์ฟเวอร์ทุกหน้าโดยไม่ได้ความคมเพิ่มเลย
+        */
+        sizes="224px"
+        preload
         className={`h-12 w-auto sm:h-14 ${isLight ? "drop-shadow-lg" : ""}`}
       />
 

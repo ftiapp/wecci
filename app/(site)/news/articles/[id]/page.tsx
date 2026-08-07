@@ -114,7 +114,7 @@ export default async function ArticleDetailPage({
                     fill
                     sizes="352px"
                     className="object-cover"
-                    priority
+                    preload
                   />
                 ) : (
                   <span className="flex h-full items-center justify-center bg-gradient-to-br from-wecci-navy to-wecci-aqua text-white/40">

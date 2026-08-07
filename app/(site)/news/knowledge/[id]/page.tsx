@@ -118,7 +118,7 @@ export default async function KnowledgeDetailPage({
                     sizes="352px"
                     className="object-cover"
                     unoptimized={cover.startsWith("http")}
-                    priority
+                    preload
                   />
                 ) : (
                   <span className="flex h-full items-center justify-center bg-gradient-to-br from-wecci-navy to-wecci-aqua text-white/40">

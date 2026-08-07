@@ -15,14 +15,13 @@ export function HeroPanel({
   return (
     <div className={`relative ${className}`}>
       {/*
-        มือถือ: ข้อความกินเต็มความกว้าง ถ้าไล่จางไปทางขวาตัวอักษรฝั่งขวาจะลอยอยู่บนภาพจนอ่านไม่ออก
-        จึงใช้แถบทึบพาดเต็มจอแทน แล้วค่อยเปลี่ยนเป็นแบบไล่จางตั้งแต่ sm ขึ้นไปที่ข้อความไม่เต็มจอแล้ว
+        ไม่มีแผ่นสีรองหลังข้อความแล้ว ภาพจึงไม่ถูกบังหรือย้อมสี
+        มือถือใช้เงาใต้ตัวอักษรแทน — กันตัวขาวจมไปกับส่วนสว่างของภาพ
+        โดยไม่ทำให้เห็นเป็นก้อนสีทึบ ๆ พาดอยู่บนแบนเนอร์
       */}
-      <div
-        className="absolute -bottom-6 -left-[50vw] -right-[50vw] -top-6 bg-wecci-forest/88 sm:-bottom-10 sm:-top-10 sm:right-[-14%] sm:rounded-r-[2.5rem] sm:bg-gradient-to-r sm:from-wecci-forest/92 sm:via-wecci-blue/62 sm:via-72% sm:to-transparent"
-        aria-hidden
-      />
-      <div className="relative">{children}</div>
+      <div className="relative [text-shadow:0_1px_10px_rgba(0,0,0,0.55)] sm:[text-shadow:none]">
+        {children}
+      </div>
     </div>
   );
 }

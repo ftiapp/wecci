@@ -72,10 +72,10 @@ export function ChairmanIntro({
               height={1923}
               // เผื่อจอ retina — ขอไฟล์กว้างกว่าพื้นที่แสดงผลจริงราวสองเท่า ภาพจึงคม
               sizes="(min-width: 1024px) 60rem, 30rem"
-              quality={90}
+              // ต้องเป็นค่าที่มีใน images.qualities ไม่งั้นโดนปัดให้เงียบ ๆ (เดิมส่ง 90 โดนปัดเป็น 100)
+              quality={85}
               // ไฟล์นี้ไดคัตพื้นหลังมาแล้ว จึงไม่ต้องใช้ mask ไล่จางขอบอีก
               className="relative h-auto w-full min-h-0 object-contain drop-shadow-xl lg:h-full lg:w-auto"
-              priority
             />
 
             <figcaption className="relative mt-4 text-center">
