@@ -40,6 +40,8 @@ export function PageHero({
         overlay={overlay}
         priority
         zoom={zoom}
+        /* แบนเนอร์เต็มจอโดนซูมเข้า ใช้ 75 แล้วขอบภาพจะแตกให้เห็น */
+        quality={88}
       />
 
       <Container className="relative z-10 pb-16 pt-40 sm:pb-20">

@@ -13,6 +13,7 @@ export function MediaBackdrop({
   priority = false,
   sizes = "100vw",
   zoom = false,
+  quality,
 }: {
   src?: string;
   alt?: string;
@@ -23,6 +24,8 @@ export function MediaBackdrop({
   sizes?: string;
   /** ซูมเข้าอย่างช้า ๆ ตอนเปิดหน้า เหมาะกับแบนเนอร์ใหญ่ */
   zoom?: boolean;
+  /** ต้องเป็นค่าที่ประกาศไว้ใน images.qualities ของ next.config */
+  quality?: number;
 }) {
   return (
     <div className="absolute inset-0 -z-0 overflow-hidden" aria-hidden={!alt}>
@@ -35,6 +38,7 @@ export function MediaBackdrop({
           fill
           priority={priority}
           sizes={sizes}
+          quality={quality}
           className={`object-cover ${zoom ? "wecci-ken-burns" : ""}`}
         />
       )}
