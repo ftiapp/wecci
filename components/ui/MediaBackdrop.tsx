@@ -30,6 +30,13 @@ export function MediaBackdrop({
   /** "eager" สำหรับภาพที่ยังไม่ได้แสดงแต่ต้องพร้อมใช้ทันทีเมื่อสลับ */
   loading?: "eager" | "lazy";
 }) {
+  /*
+    ken burns ซูมเข้าสูงสุด 10% ถ้าขอไฟล์มาเท่าความกว้างจอพอดี
+    ตอนซูมเบราว์เซอร์จะต้องขยายภาพเกินความละเอียดจริงจนเห็นเป็นความเบลอ
+    จึงขอเผื่อไว้ 15% ให้มีพิกเซลเหลือพอตลอดช่วงอนิเมชัน
+  */
+  const effectiveSizes = zoom && sizes === "100vw" ? "115vw" : sizes;
+
   return (
     <div className="absolute inset-0 -z-0 overflow-hidden" aria-hidden={!alt}>
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient}`} />
@@ -40,7 +47,7 @@ export function MediaBackdrop({
           alt={alt}
           fill
           priority={priority}
-          sizes={sizes}
+          sizes={effectiveSizes}
           quality={quality}
           loading={loading}
           className={`object-cover ${zoom ? "wecci-ken-burns" : ""}`}

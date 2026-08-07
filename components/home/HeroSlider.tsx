@@ -57,8 +57,8 @@ export function HeroSlider() {
             priority={i === 0}
             loading={i === 0 ? undefined : "eager"}
             quality={100}
-            /* ไม่ซูม — ขยายภาพเกิน 100% เมื่อไหร่ก็เห็นเป็นความเบลอเมื่อนั้น */
-            zoom={false}
+            /* ซูมเฉพาะสไลด์ที่แสดงอยู่ — สลับคลาสทำให้อนิเมชันเริ่มใหม่โดยไม่ต้อง remount */
+            zoom={i === index}
           />
         </div>
       ))}

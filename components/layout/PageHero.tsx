@@ -17,7 +17,7 @@ export function PageHero({
   gradient = "from-wecci-navy via-wecci-blue to-wecci-aqua",
   /* ข้อความมีแถบสีรองของตัวเองแล้ว ตรงนี้จึงเหลือแค่เงาบาง ๆ ไม่ย้อมสีรูป */
   overlay = "bg-gradient-to-t from-black/30 via-transparent to-transparent",
-  zoom = false,
+  zoom = true,
 }: {
   eyebrow?: string;
   title: string;
