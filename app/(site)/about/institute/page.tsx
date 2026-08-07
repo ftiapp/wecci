@@ -18,8 +18,8 @@ export default function Page() {
       <PageHero
         title="เกี่ยวกับสถาบัน"
         description="จุดเริ่มต้นและบทบาทของสถาบันน้ำ สิ่งแวดล้อม และ Climate Change"
-        image="/images/about/institute-hero.webp"
-        imageAlt="โลกที่จมอยู่ในน้ำบางส่วน สื่อถึงวิกฤตน้ำและสภาพภูมิอากาศ"
+        image="/images/about/institute-hero-v2.webp"
+        imageAlt="มือคู่หนึ่งประคองต้นกล้าสีเขียว สื่อถึงการดูแลสิ่งแวดล้อมอย่างยั่งยืน"
         breadcrumb={[
           { label: "เกี่ยวกับเรา", href: "/about" },
           { label: "เกี่ยวกับสถาบัน", href: "/about/institute" },

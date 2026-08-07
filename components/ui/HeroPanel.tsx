@@ -15,7 +15,7 @@ export function HeroPanel({
   return (
     <div className={`relative ${className}`}>
       <div
-        className="absolute -bottom-10 -left-[50vw] -top-10 right-[-8%] rounded-r-[2.5rem] bg-gradient-to-r from-wecci-forest/92 via-wecci-mint/62 via-72% to-transparent sm:right-[-14%]"
+        className="absolute -bottom-10 -left-[50vw] -top-10 right-[-8%] rounded-r-[2.5rem] bg-gradient-to-r from-wecci-forest/92 via-wecci-blue/62 via-72% to-transparent sm:right-[-14%]"
         aria-hidden
       />
       <div className="relative">{children}</div>
