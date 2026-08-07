@@ -21,7 +21,7 @@ export default function Page() {
       <PageHero
         title="วิสัยทัศน์และพันธกิจ"
         description="ทิศทางการดำเนินงานและพันธกิจหลักขององค์กร"
-        image="/images/about/vision-hero-v2.webp"
+        image="/images/about/vision-hero-v3.webp"
         imageAlt="หยดน้ำค้างบนใบไม้เขียว สื่อถึงการดูแลทรัพยากรน้ำอย่างใส่ใจ"
         breadcrumb={[
           { label: "เกี่ยวกับเรา" },
