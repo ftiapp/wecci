@@ -33,17 +33,34 @@ export function HeroSlider() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <MediaBackdrop
-        key={slide.id}
-        src={slide.image}
-        alt={slide.imageAlt ?? ""}
-        gradient={slide.gradient}
-        /* เงาไล่จากซ้าย ปรับความเข้มแยกรายสไลด์ตามความสว่างของภาพ */
-        overlay={slide.overlay ?? "bg-gradient-to-r from-black/60 via-black/25 to-transparent"}
-        priority={index === 0}
-        /* Ken Burns — key ผูกกับ id สไลด์ ภาพจึงเริ่มซูมใหม่ทุกครั้งที่เปลี่ยนสไลด์ */
-        zoom
-      />
+      {/*
+        วางภาพทุกสไลด์ซ้อนกันไว้ตั้งแต่แรกแล้วสลับด้วย opacity
+        ถ้า mount/unmount ตามสไลด์ที่เลือก เบราว์เซอร์จะต้องโหลดภาพใหม่ทุกครั้ง
+        ระหว่างรอผู้ใช้จะเห็นพื้น gradient โผล่มาแทน
+      */}
+      {heroSlides.map((item, i) => (
+        <div
+          key={item.id}
+          className={`absolute inset-0 transition-opacity duration-700 ${
+            i === index ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden={i !== index}
+        >
+          <MediaBackdrop
+            src={item.image}
+            alt={item.imageAlt ?? ""}
+            gradient={item.gradient}
+            /* เงาไล่จากซ้าย ปรับความเข้มแยกรายสไลด์ตามความสว่างของภาพ */
+            overlay={item.overlay ?? "bg-gradient-to-r from-black/60 via-black/25 to-transparent"}
+            /* สไลด์แรกคือ LCP ที่เหลือโหลดตามทันทีเพื่อให้พร้อมก่อนถูกสลับไปหา */
+            priority={i === 0}
+            loading={i === 0 ? undefined : "eager"}
+            quality={88}
+            /* ซูมเฉพาะสไลด์ที่แสดงอยู่ — สลับคลาสทำให้อนิเมชันเริ่มใหม่โดยไม่ต้อง remount */
+            zoom={i === index}
+          />
+        </div>
+      ))}
 
       <Container className="relative z-10 pb-16 pt-40 sm:pb-20">
         <div key={slide.id} className="wecci-fade-up max-w-4xl text-white 2xl:max-w-5xl">
