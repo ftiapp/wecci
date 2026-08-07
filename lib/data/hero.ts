@@ -48,8 +48,8 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "รู้จักสถาบันฯ",
     ctaHref: "/about",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
-    image: "/images/hero/water-globe.webp",
-    imageAlt: "ลูกโลกแก้วบนพื้นมอสส์เปียกน้ำ สื่อถึงการดูแลทรัพยากรน้ำของโลก",
+    image: "/images/hero/pipeline.webp",
+    imageAlt: "ท่อส่งน้ำขนาดใหญ่ทอดผ่านพื้นที่สีเขียว สื่อถึงโครงสร้างพื้นฐานการจัดการน้ำของภาคอุตสาหกรรม",
     // ภาพสว่างและตัวแบบอยู่ครึ่งซ้าย ต้องใช้เงาเข้มกว่าปกติ
     overlay: "bg-gradient-to-r from-wecci-navy/85 via-wecci-navy/50 to-transparent",
   },
