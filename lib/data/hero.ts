@@ -36,8 +36,8 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "ดูบริการทั้งหมด",
     ctaHref: "/services",
     gradient: "from-wecci-navy via-wecci-blue to-wecci-teal",
-    image: "/images/hero/consult.webp",
-    imageAlt: "เจ้าหน้าที่ให้คำปรึกษาแก่ผู้ประกอบการ",
+    image: "/images/hero/turbines.webp",
+    imageAlt: "กังหันลมเรียงรายบนเนินหญ้า สื่อถึงพลังงานสะอาดและการพัฒนาที่ยั่งยืน",
     overlay: "bg-gradient-to-r from-black/75 via-black/40 to-transparent",
   },
   {
