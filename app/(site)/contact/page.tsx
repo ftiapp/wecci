@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description: `ช่องทางติดต่อ${siteConfig.nameTh}`,
 };
 
+// เนื้อหาหน้านี้อยู่ในฐานข้อมูล จึงต้องเรนเดอร์ตอนมีคนเข้า ไม่ใช่ตอน build
+export const dynamic = "force-dynamic";
+
 export default async function ContactPage() {
   // เนื้อหาทั้งหมดของหน้านี้แก้ได้จากหลังบ้าน /admin/pages/contact
   const blocks = await getPageBlocks("contact");
