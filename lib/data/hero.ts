@@ -35,8 +35,8 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "ดูบริการทั้งหมด",
     ctaHref: "/services",
     gradient: "from-wecci-navy via-wecci-blue to-wecci-teal",
-    image: "/images/hero/service-v3.webp",
-    imageAlt: "หยดน้ำรูปลูกโลกกำลังตกลงสู่ผิวน้ำท่ามกลางใบไม้เขียว สื่อถึงการดูแลทรัพยากรน้ำของโลก",
+    image: "/images/hero/service-v4.webp",
+    imageAlt: "มือรองน้ำใสไหลลงสู่ผิวน้ำ มีใบไม้เขียวและกังหันลมอยู่เบื้องหลัง สื่อถึงการจัดการน้ำและพลังงานสะอาด",
   },
   {
     id: "vision",
