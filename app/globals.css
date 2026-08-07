@@ -16,6 +16,8 @@
   --wecci-teal: #2e728c;
   --wecci-red: #e81529;
   --wecci-sand: #f1f6fc;
+  /* mint เวอร์ชันเข้ม สำหรับรองตัวอักษรสีขาว — mint ล้วนสว่างเกินจนอ่านไม่ถนัด */
+  --wecci-forest: #0e5c2c;
 }
 
 @theme inline {
@@ -29,6 +31,7 @@
   --color-wecci-teal: var(--wecci-teal);
   --color-wecci-red: var(--wecci-red);
   --color-wecci-sand: var(--wecci-sand);
+  --color-wecci-forest: var(--wecci-forest);
 
   --font-sans: var(--font-thai-sans);
 }
