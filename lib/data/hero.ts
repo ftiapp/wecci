@@ -26,7 +26,6 @@ export const heroSlides: HeroSlide[] = [
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/sprout.webp",
     imageAlt: "ต้นกล้าเขียวงอกจากหยดน้ำ สื่อถึงการใช้ทรัพยากรน้ำอย่างยั่งยืน",
-    overlay: "bg-gradient-to-r from-black/70 via-black/35 to-transparent",
   },
   {
     id: "service",
@@ -38,7 +37,6 @@ export const heroSlides: HeroSlide[] = [
     gradient: "from-wecci-navy via-wecci-blue to-wecci-teal",
     image: "/images/hero/turbines.webp",
     imageAlt: "กังหันลมเรียงรายบนเนินหญ้า สื่อถึงพลังงานสะอาดและการพัฒนาที่ยั่งยืน",
-    overlay: "bg-gradient-to-r from-black/75 via-black/40 to-transparent",
   },
   {
     id: "vision",
@@ -50,7 +48,5 @@ export const heroSlides: HeroSlide[] = [
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/pipeline.webp",
     imageAlt: "ท่อส่งน้ำขนาดใหญ่ทอดผ่านพื้นที่สีเขียว สื่อถึงโครงสร้างพื้นฐานการจัดการน้ำของภาคอุตสาหกรรม",
-    // ภาพสว่าง ต้องใช้เงาเข้มกว่าปกติ — แต่ต้องเป็นสีดำ ไม่ใช่สีกรม ไม่งั้นภาพจะถูกย้อมเป็นน้ำเงิน
-    overlay: "bg-gradient-to-r from-black/72 via-black/38 to-transparent",
   },
 ];

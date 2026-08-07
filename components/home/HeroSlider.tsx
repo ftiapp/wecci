@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { CtaButton } from "@/components/ui/CtaButton";
+import { HeroPanel } from "@/components/ui/HeroPanel";
 import { MediaBackdrop } from "@/components/ui/MediaBackdrop";
 import { heroSlides } from "@/lib/data/hero";
 
@@ -50,8 +51,8 @@ export function HeroSlider() {
             src={item.image}
             alt={item.imageAlt ?? ""}
             gradient={item.gradient}
-            /* เงาไล่จากซ้าย ปรับความเข้มแยกรายสไลด์ตามความสว่างของภาพ */
-            overlay={item.overlay ?? "bg-gradient-to-r from-black/60 via-black/25 to-transparent"}
+            /* ข้อความมีแถบสีรองของตัวเองแล้ว ตรงนี้จึงเหลือแค่เงาบาง ๆ กันปุ่มด้านล่างจม */
+            overlay={item.overlay ?? "bg-gradient-to-t from-black/30 via-transparent to-transparent"}
             /* สไลด์แรกคือ LCP ที่เหลือโหลดตามทันทีเพื่อให้พร้อมก่อนถูกสลับไปหา */
             priority={i === 0}
             loading={i === 0 ? undefined : "eager"}
@@ -63,7 +64,7 @@ export function HeroSlider() {
       ))}
 
       <Container className="relative z-10 pb-16 pt-40 sm:pb-20">
-        <div key={slide.id} className="wecci-fade-up max-w-4xl text-white 2xl:max-w-5xl">
+        <HeroPanel key={slide.id} className="wecci-fade-up max-w-4xl text-white 2xl:max-w-5xl">
           {slide.eyebrow && (
             <p className="mb-4 inline-block rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold backdrop-blur-sm sm:text-sm">
               {slide.eyebrow}
@@ -83,7 +84,7 @@ export function HeroSlider() {
               บริการของเรา
             </CtaButton>
           </div>
-        </div>
+        </HeroPanel>
 
         <div
           className="mt-12 flex items-center gap-3"

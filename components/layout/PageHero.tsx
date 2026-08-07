@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { HeroPanel } from "@/components/ui/HeroPanel";
 import { MediaBackdrop } from "@/components/ui/MediaBackdrop";
 
 /**
@@ -14,8 +15,8 @@ export function PageHero({
   image,
   imageAlt = "",
   gradient = "from-wecci-navy via-wecci-blue to-wecci-aqua",
-  /* เงาดำโปร่งไล่จากซ้าย ไม่ย้อมสีรูป แค่พอให้ตัวอักษรขาวอ่านออก */
-  overlay = "bg-gradient-to-r from-black/60 via-black/25 to-transparent",
+  /* ข้อความมีแถบสีรองของตัวเองแล้ว ตรงนี้จึงเหลือแค่เงาบาง ๆ ไม่ย้อมสีรูป */
+  overlay = "bg-gradient-to-t from-black/30 via-transparent to-transparent",
   zoom = true,
 }: {
   eyebrow?: string;
@@ -45,6 +46,7 @@ export function PageHero({
       />
 
       <Container className="relative z-10 pb-16 pt-40 sm:pb-20">
+        <HeroPanel className="max-w-4xl 2xl:max-w-5xl">
         <nav aria-label="เส้นทางนำทาง" className="mb-5 text-xs text-slate-200">
           <ol className="flex flex-wrap items-center gap-2">
             <li>
@@ -63,7 +65,7 @@ export function PageHero({
           </ol>
         </nav>
 
-        <div className="wecci-fade-up max-w-4xl 2xl:max-w-5xl">
+        <div className="wecci-fade-up">
           {eyebrow && (
             <p className="mb-4 inline-block rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold backdrop-blur-sm sm:text-sm">
               {eyebrow}
@@ -78,6 +80,7 @@ export function PageHero({
             </p>
           )}
         </div>
+        </HeroPanel>
       </Container>
     </section>
   );
