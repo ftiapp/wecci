@@ -26,7 +26,7 @@ export const heroSlides: HeroSlide[] = [
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/globe.webp",
     imageAlt: "ต้นไม้บนลูกโลกและกังหันลม สื่อถึงสิ่งแวดล้อมและสภาพภูมิอากาศ",
-    overlay: "bg-gradient-to-r from-wecci-navy/85 via-wecci-teal/45 to-transparent",
+    overlay: "bg-gradient-to-r from-black/70 via-black/35 to-transparent",
   },
   {
     id: "service",
@@ -50,7 +50,7 @@ export const heroSlides: HeroSlide[] = [
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/pipeline.webp",
     imageAlt: "ท่อส่งน้ำขนาดใหญ่ทอดผ่านพื้นที่สีเขียว สื่อถึงโครงสร้างพื้นฐานการจัดการน้ำของภาคอุตสาหกรรม",
-    // ภาพสว่างและตัวแบบอยู่ครึ่งซ้าย ต้องใช้เงาเข้มกว่าปกติ
-    overlay: "bg-gradient-to-r from-wecci-navy/85 via-wecci-navy/50 to-transparent",
+    // ภาพสว่าง ต้องใช้เงาเข้มกว่าปกติ — แต่ต้องเป็นสีดำ ไม่ใช่สีกรม ไม่งั้นภาพจะถูกย้อมเป็นน้ำเงิน
+    overlay: "bg-gradient-to-r from-black/72 via-black/38 to-transparent",
   },
 ];
