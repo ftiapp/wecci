@@ -24,7 +24,7 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "ปรึกษาผู้เชี่ยวชาญ",
     ctaHref: "/contact",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
-    image: "/images/hero/sprout.webp",
+    image: "/images/hero/sprout-v2.webp",
     imageAlt: "ต้นกล้าเขียวงอกจากหยดน้ำ สื่อถึงการใช้ทรัพยากรน้ำอย่างยั่งยืน",
   },
   {
@@ -35,7 +35,7 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "ดูบริการทั้งหมด",
     ctaHref: "/services",
     gradient: "from-wecci-navy via-wecci-blue to-wecci-teal",
-    image: "/images/hero/turbines.webp",
+    image: "/images/hero/turbines-v2.webp",
     imageAlt: "กังหันลมเรียงรายบนเนินหญ้า สื่อถึงพลังงานสะอาดและการพัฒนาที่ยั่งยืน",
   },
   {
@@ -46,7 +46,7 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "รู้จักสถาบันฯ",
     ctaHref: "/about",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
-    image: "/images/hero/pipeline.webp",
+    image: "/images/hero/pipeline-v2.webp",
     imageAlt: "ท่อส่งน้ำขนาดใหญ่ทอดผ่านพื้นที่สีเขียว สื่อถึงโครงสร้างพื้นฐานการจัดการน้ำของภาคอุตสาหกรรม",
   },
 ];
