@@ -12,6 +12,8 @@ export default function ExecutivesPage() {
     <PageHero
       title="โครงสร้างผู้บริหาร"
       description="คณะผู้บริหารที่กำกับทิศทางการดำเนินงานของสถาบันฯ"
+      image="/images/about/executives-hero.webp"
+      imageAlt="ผังโครงสร้างองค์กรลอยอยู่เหนือภูเขา แม่น้ำ และผืนป่า สื่อถึงการกำกับดูแลด้านน้ำและสิ่งแวดล้อม"
       breadcrumb={[
         { label: "เกี่ยวกับเรา" },
         { label: "โครงสร้างผู้บริหาร", href: "/about/executives" },
