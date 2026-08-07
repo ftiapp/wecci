@@ -44,7 +44,7 @@ export default async function ServiceDetailPage({
         title={section.label}
         description={section.description}
         breadcrumb={[
-          { label: "บริการของเรา", href: "/services" },
+          { label: "บริการของเรา" },
           { label: section.label, href: `/services/${section.id}` },
         ]}
       />

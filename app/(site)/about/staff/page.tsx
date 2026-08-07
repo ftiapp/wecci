@@ -40,7 +40,7 @@ export default async function StaffPage() {
         image="/images/about/staff-hero-v5.webp"
         imageAlt="ทีมงานสถาบันน้ำ สิ่งแวดล้อม และ Climate Change"
         breadcrumb={[
-          { label: "เกี่ยวกับเรา", href: "/about" },
+          { label: "เกี่ยวกับเรา" },
           { label: "โครงสร้างบุคลากร", href: "/about/staff" },
         ]}
       />

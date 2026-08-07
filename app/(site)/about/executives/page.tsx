@@ -13,7 +13,7 @@ export default function ExecutivesPage() {
       title="โครงสร้างผู้บริหาร"
       description="คณะผู้บริหารที่กำกับทิศทางการดำเนินงานของสถาบันฯ"
       breadcrumb={[
-        { label: "เกี่ยวกับเรา", href: "/about" },
+        { label: "เกี่ยวกับเรา" },
         { label: "โครงสร้างผู้บริหาร", href: "/about/executives" },
       ]}
     />

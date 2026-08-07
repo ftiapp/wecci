@@ -32,8 +32,8 @@ export const heroSlides: HeroSlide[] = [
     title: "ที่ปรึกษา ตรวจวิเคราะห์ และพัฒนาระบบจัดการน้ำสำหรับโรงงาน",
     description:
       "ทีมผู้เชี่ยวชาญและห้องปฏิบัติการมาตรฐาน พร้อมสนับสนุนผู้ประกอบการตั้งแต่การประเมิน ออกแบบ ไปจนถึงการรับรองผล",
-    ctaLabel: "ดูบริการทั้งหมด",
-    ctaHref: "/services",
+    ctaLabel: "ปรึกษา CFO/CFP",
+    ctaHref: "/services/cfo-cfp",
     gradient: "from-wecci-navy via-wecci-blue to-wecci-teal",
     image: "/images/hero/service-v4.webp",
     imageAlt: "มือรองน้ำใสไหลลงสู่ผิวน้ำ มีใบไม้เขียวและกังหันลมอยู่เบื้องหลัง สื่อถึงการจัดการน้ำและพลังงานสะอาด",
@@ -44,7 +44,7 @@ export const heroSlides: HeroSlide[] = [
     description:
       "เชื่อมโยงภาครัฐ ภาคอุตสาหกรรม และชุมชน ด้วยองค์ความรู้ เทคโนโลยี และข้อมูล เพื่อการใช้น้ำอย่างรู้คุณค่าและยั่งยืน",
     ctaLabel: "รู้จักสถาบันฯ",
-    ctaHref: "/about",
+    ctaHref: "/about/institute",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
     image: "/images/hero/vision-v3.webp",
     imageAlt: "หยดน้ำบนใบไม้เขียวที่สะท้อนภาพโลกอยู่ข้างใน สื่อถึงการดูแลทรัพยากรน้ำของโลก",

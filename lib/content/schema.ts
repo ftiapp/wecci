@@ -27,31 +27,8 @@ export type PageDef = {
   blocks: BlockDef[];
 };export const pageDefs: PageDef[] = [
   {
-    slug: "about",
-    label: "เกี่ยวกับเรา",
-    href: "/about",
-    blocks: [
-      {
-        key: "hero",
-        label: "แบนเนอร์หัวหน้า",
-        description: "ส่วนบนสุดของหน้า",
-        fields: [
-          { name: "title", label: "หัวข้อ", type: "text" },
-          { name: "description", label: "คำอธิบายใต้หัวข้อ", type: "textarea" },
-          {
-            name: "image",
-            label: "รูปพื้นหลัง",
-            type: "image",
-            help: "แนะนำแนวนอน กว้างอย่างน้อย 2000px",
-          },
-          { name: "imageAlt", label: "คำบรรยายรูป (สำหรับผู้พิการทางสายตา)", type: "text" },
-        ],
-      },
-    ],
-  },
-  {
     slug: "about-institute",
-    label: "— เกี่ยวกับสถาบัน",
+    label: "เกี่ยวกับสถาบัน",
     href: "/about/institute",
     blocks: [
       {
@@ -84,7 +61,7 @@ export type PageDef = {
   },
   {
     slug: "about-vision",
-    label: "— วิสัยทัศน์และพันธกิจ",
+    label: "วิสัยทัศน์และพันธกิจ",
     href: "/about/vision",
     blocks: [
       {
@@ -117,7 +94,7 @@ export type PageDef = {
   },
   {
     slug: "about-strategy",
-    label: "— กลยุทธ์",
+    label: "กลยุทธ์",
     href: "/about/strategy",
     blocks: [
       {
@@ -150,74 +127,8 @@ export type PageDef = {
   },
   {
     slug: "about-executives",
-    label: "— โครงสร้างผู้บริหาร",
+    label: "โครงสร้างผู้บริหาร",
     href: "/about/executives",
-    blocks: [
-      {
-        key: "hero",
-        label: "แบนเนอร์หัวหน้า",
-        description: "ส่วนบนสุดของหน้า",
-        fields: [
-          { name: "title", label: "หัวข้อ", type: "text" },
-          { name: "description", label: "คำอธิบายใต้หัวข้อ", type: "textarea" },
-          {
-            name: "image",
-            label: "รูปพื้นหลัง",
-            type: "image",
-            help: "แนะนำแนวนอน กว้างอย่างน้อย 2000px",
-          },
-          { name: "imageAlt", label: "คำบรรยายรูป (สำหรับผู้พิการทางสายตา)", type: "text" },
-        ],
-      },
-      {
-        key: "section",
-        label: "หัวข้อเนื้อหา",
-        description: "หัวข้อและคำอธิบายของเซกชันเนื้อหา",
-        fields: [
-          { name: "eyebrow", label: "ป้ายเล็กเหนือหัวข้อ", type: "text" },
-          { name: "title", label: "หัวข้อเซกชัน", type: "text" },
-          { name: "description", label: "คำอธิบายเซกชัน", type: "textarea" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "services",
-    label: "บริการของเรา",
-    href: "/services",
-    blocks: [
-      {
-        key: "hero",
-        label: "แบนเนอร์หัวหน้า",
-        description: "ส่วนบนสุดของหน้า",
-        fields: [
-          { name: "title", label: "หัวข้อ", type: "text" },
-          { name: "description", label: "คำอธิบายใต้หัวข้อ", type: "textarea" },
-          {
-            name: "image",
-            label: "รูปพื้นหลัง",
-            type: "image",
-            help: "แนะนำแนวนอน กว้างอย่างน้อย 2000px",
-          },
-          { name: "imageAlt", label: "คำบรรยายรูป (สำหรับผู้พิการทางสายตา)", type: "text" },
-        ],
-      },
-      {
-        key: "section",
-        label: "หัวข้อเนื้อหา",
-        description: "หัวข้อและคำอธิบายของเซกชันเนื้อหา",
-        fields: [
-          { name: "eyebrow", label: "ป้ายเล็กเหนือหัวข้อ", type: "text" },
-          { name: "title", label: "หัวข้อเซกชัน", type: "text" },
-          { name: "description", label: "คำอธิบายเซกชัน", type: "textarea" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "news",
-    label: "ข่าวสาร",
-    href: "/news",
     blocks: [
       {
         key: "hero",

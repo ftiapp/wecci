@@ -48,7 +48,6 @@ function readForm(formData: FormData) {
 function revalidateKnowledge() {
   revalidatePath("/admin/knowledge");
   revalidatePath("/news/knowledge");
-  revalidatePath("/news");
 }
 
 /** เพิ่มรายการองค์ความรู้/วีดีโอ */

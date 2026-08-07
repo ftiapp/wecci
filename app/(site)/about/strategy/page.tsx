@@ -16,7 +16,7 @@ export default function StrategyPage() {
         title="กลยุทธ์"
         description="กลยุทธ์และแผนการดำเนินงานของสถาบันฯ"
         breadcrumb={[
-          { label: "เกี่ยวกับเรา", href: "/about" },
+          { label: "เกี่ยวกับเรา" },
           { label: "กลยุทธ์", href: "/about/strategy" },
         ]}
       />

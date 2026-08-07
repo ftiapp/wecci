@@ -87,7 +87,7 @@ function readForm(formData: FormData) {
 /** ล้างแคชทุกหน้าที่แสดงกิจกรรม */
 function revalidateEvents(id?: number) {
   revalidatePath("/admin/events");
-  revalidatePath("/news");
+  revalidatePath("/news/events");
   if (id) revalidatePath(`/news/events/${id}`);
 }
 

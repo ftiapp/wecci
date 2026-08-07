@@ -43,7 +43,7 @@ export default async function KnowledgePage() {
         title="องค์ความรู้/วีดีโอ"
         description="คลังความรู้ คู่มือปฏิบัติ และวีดีโอเผยแพร่ด้านการจัดการน้ำและสิ่งแวดล้อม"
         breadcrumb={[
-          { label: "ข่าวสาร", href: "/news" },
+          { label: "ข่าวสาร" },
           { label: "องค์ความรู้/วีดีโอ", href: "/news/knowledge" },
         ]}
       />

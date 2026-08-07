@@ -49,7 +49,6 @@ function readForm(formData: FormData) {
 
 function revalidateArticles(id?: number) {
   revalidatePath("/admin/articles");
-  revalidatePath("/news");
   revalidatePath("/news/articles");
   if (id) revalidatePath(`/news/articles/${id}`);
 }

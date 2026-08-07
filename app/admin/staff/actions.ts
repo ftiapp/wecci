@@ -45,7 +45,7 @@ function readForm(formData: FormData) {
 function revalidateStaff() {
   revalidatePath("/admin/staff");
   revalidatePath("/about/staff");
-  revalidatePath("/about");
+  revalidatePath("/about/staff");
 }
 
 /** เพิ่มบุคลากรใหม่ */

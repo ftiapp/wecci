@@ -23,7 +23,7 @@ export default async function EventsPage() {
         title="ปฏิทินกิจกรรม"
         description="ตารางอบรม สัมมนา ประชุม และศึกษาดูงานของสถาบันฯ ตลอดทั้งปี"
         breadcrumb={[
-          { label: "ข่าวสาร", href: "/news" },
+          { label: "ข่าวสาร" },
           { label: "ปฏิทินกิจกรรม", href: "/news/events" },
         ]}
         image="/images/news/reading-v2.webp"

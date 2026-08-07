@@ -21,7 +21,7 @@ export default function Page() {
         image="/images/about/institute-hero-v2.webp"
         imageAlt="มือคู่หนึ่งประคองต้นกล้าสีเขียว สื่อถึงการดูแลสิ่งแวดล้อมอย่างยั่งยืน"
         breadcrumb={[
-          { label: "เกี่ยวกับเรา", href: "/about" },
+          { label: "เกี่ยวกับเรา" },
           { label: "เกี่ยวกับสถาบัน", href: "/about/institute" },
         ]}
       />

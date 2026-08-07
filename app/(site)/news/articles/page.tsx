@@ -43,7 +43,7 @@ export default async function ArticlesPage() {
         title="ข่าวสาร/บทความ"
         description="ติดตามข่าวประชาสัมพันธ์ บทความ และบทวิเคราะห์จากทีมงานของสถาบันฯ"
         breadcrumb={[
-          { label: "ข่าวสาร", href: "/news" },
+          { label: "ข่าวสาร" },
           { label: "ข่าวสาร/บทความ", href: "/news/articles" },
         ]}
       />

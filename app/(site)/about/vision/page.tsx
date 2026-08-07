@@ -24,7 +24,7 @@ export default function Page() {
         image="/images/about/vision-hero-v2.webp"
         imageAlt="หยดน้ำค้างบนใบไม้เขียว สื่อถึงการดูแลทรัพยากรน้ำอย่างใส่ใจ"
         breadcrumb={[
-          { label: "เกี่ยวกับเรา", href: "/about" },
+          { label: "เกี่ยวกับเรา" },
           { label: "วิสัยทัศน์และพันธกิจ", href: "/about/vision" },
         ]}
       />

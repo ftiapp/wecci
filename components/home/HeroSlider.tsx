@@ -80,8 +80,8 @@ export function HeroSlider() {
             <CtaButton href={slide.ctaHref} variant="outline">
               {slide.ctaLabel}
             </CtaButton>
-            <CtaButton href="/services" variant="outline">
-              บริการของเรา
+            <CtaButton href="/contact" variant="outline">
+              ติดต่อเรา
             </CtaButton>
           </div>
         </HeroPanel>

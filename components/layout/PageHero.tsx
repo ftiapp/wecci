@@ -22,7 +22,8 @@ export function PageHero({
   eyebrow?: string;
   title: string;
   description?: string;
-  breadcrumb?: { label: string; href: string }[];
+  /** ไม่ใส่ href = แสดงเป็นข้อความเฉย ๆ ใช้กับหมวดที่ไม่มีหน้ารวมของตัวเอง */
+  breadcrumb?: { label: string; href?: string }[];
   /** ภาพหัวหน้าเพจ วางไฟล์ที่ public/images/page/ */
   image?: string;
   imageAlt?: string;
@@ -55,11 +56,15 @@ export function PageHero({
               </Link>
             </li>
             {breadcrumb.map((crumb) => (
-              <li key={crumb.href} className="flex items-center gap-2">
+              <li key={crumb.label} className="flex items-center gap-2">
                 <span aria-hidden>/</span>
-                <Link href={crumb.href} className="hover:text-white">
-                  {crumb.label}
-                </Link>
+                {crumb.href ? (
+                  <Link href={crumb.href} className="hover:text-white">
+                    {crumb.label}
+                  </Link>
+                ) : (
+                  <span>{crumb.label}</span>
+                )}
               </li>
             ))}
           </ol>

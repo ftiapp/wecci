@@ -115,7 +115,7 @@ export function DesktopNav({
           {/* จำกัดความกว้างแผงไม่ให้ยืดเต็มจอ รายการจึงไม่กระจายจนหายาก */}
           <Container>
             <div className="mx-auto grid max-w-5xl grid-cols-12 gap-10 py-10">
-              {/* คอลัมน์ซ้าย: ภาพประกอบ + ลิงก์ไปหน้าหลักของหมวด */}
+              {/* คอลัมน์ซ้าย: ภาพประกอบประจำหมวด — หมวดไม่มีหน้ารวมของตัวเองแล้ว จึงไม่มีลิงก์ */}
               <div className="col-span-5">
                 <div className="relative flex aspect-16/10 items-end overflow-hidden rounded-2xl p-5">
                   <MediaBackdrop
@@ -131,14 +131,6 @@ export function DesktopNav({
                     </p>
                   )}
                 </div>
-
-                <Link
-                  href={activeItem.href}
-                  className="group mt-4 inline-flex items-center gap-2 text-sm font-bold text-wecci-blue transition hover:gap-3"
-                >
-                  ดู{activeItem.label}ทั้งหมด
-                  <span aria-hidden>→</span>
-                </Link>
               </div>
 
               {/* คอลัมน์ขวา: รายการเมนูย่อยเรียงเป็นแถวเดียว อ่านไล่จากบนลงล่าง */}
