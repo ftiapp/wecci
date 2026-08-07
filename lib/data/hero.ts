@@ -46,7 +46,7 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "รู้จักสถาบันฯ",
     ctaHref: "/about",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
-    image: "/images/hero/pipeline-v2.webp",
-    imageAlt: "ท่อส่งน้ำขนาดใหญ่ทอดผ่านพื้นที่สีเขียว สื่อถึงโครงสร้างพื้นฐานการจัดการน้ำของภาคอุตสาหกรรม",
+    image: "/images/hero/vision-v3.webp",
+    imageAlt: "หยดน้ำบนใบไม้เขียวที่สะท้อนภาพโลกอยู่ข้างใน สื่อถึงการดูแลทรัพยากรน้ำของโลก",
   },
 ];
