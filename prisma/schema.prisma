@@ -1,0 +1,311 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model factories {
+  id               Int                @id @default(autoincrement())
+  code             String             @unique @db.VarChar(30)
+  name             String             @db.VarChar(300)
+  industryType     String             @db.VarChar(120)
+  province         String             @db.VarChar(100)
+  district         String?            @db.VarChar(100)
+  industrialArea   String?            @db.VarChar(200)
+  basin            String?            @db.VarChar(120)
+  latitude         Decimal?           @db.Decimal(10, 7)
+  longitude        Decimal?           @db.Decimal(10, 7)
+  employeeCount    Int?
+  contactName      String?            @db.VarChar(200)
+  contactEmail     String?            @db.VarChar(200)
+  contactPhone     String?            @db.VarChar(50)
+  note             String?            @db.Text
+  isActive         Boolean            @default(true)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime
+  risk_assessments risk_assessments[]
+  water_sources    water_sources[]
+  water_usages     water_usages[]
+
+  @@index([industryType])
+  @@index([province])
+}
+
+model mitigation_actions {
+  id               Int                       @id @default(autoincrement())
+  assessmentId     Int
+  title            String                    @db.VarChar(300)
+  detail           String?                   @db.Text
+  owner            String?                   @db.VarChar(200)
+  dueDate          DateTime?                 @db.Date
+  status           mitigation_actions_status @default(PLANNED)
+  createdAt        DateTime                  @default(now())
+  updatedAt        DateTime
+  risk_assessments risk_assessments          @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  @@index([assessmentId])
+}
+
+model risk_assessments {
+  id                 Int                        @id @default(autoincrement())
+  factoryId          Int
+  assessedAt         DateTime                   @db.Date
+  period             String                     @db.VarChar(20)
+  assessorName       String?                    @db.VarChar(200)
+  droughtScore       Int
+  floodScore         Int
+  qualityScore       Int
+  regulatoryScore    Int
+  supplyScore        Int
+  totalScore         Decimal                    @db.Decimal(5, 2)
+  riskLevel          risk_assessments_riskLevel
+  summary            String?                    @db.Text
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime
+  mitigation_actions mitigation_actions[]
+  factories          factories                  @relation(fields: [factoryId], references: [id], onDelete: Cascade)
+
+  @@unique([factoryId, period])
+  @@index([riskLevel])
+}
+
+model users {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique @db.VarChar(200)
+  name      String     @db.VarChar(200)
+  password  String     @db.VarChar(255)
+  role      users_role @default(ANALYST)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime
+}
+
+model water_sources {
+  id               Int                @id @default(autoincrement())
+  factoryId        Int
+  type             water_sources_type
+  name             String             @db.VarChar(200)
+  sharePercent     Decimal            @default(0.00) @db.Decimal(5, 2)
+  capacityM3PerDay Decimal?           @db.Decimal(12, 2)
+  hasBackup        Boolean            @default(false)
+  note             String?            @db.Text
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime
+  factories        factories          @relation(fields: [factoryId], references: [id], onDelete: Cascade)
+
+  @@index([factoryId])
+}
+
+model water_usages {
+  id            Int       @id @default(autoincrement())
+  factoryId     Int
+  year          Int
+  month         Int
+  intakeM3      Decimal   @default(0.00) @db.Decimal(14, 2)
+  recycledM3    Decimal   @default(0.00) @db.Decimal(14, 2)
+  dischargeM3   Decimal   @default(0.00) @db.Decimal(14, 2)
+  waterCostBaht Decimal?  @db.Decimal(14, 2)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime
+  factories     factories @relation(fields: [factoryId], references: [id], onDelete: Cascade)
+
+  @@unique([factoryId, year, month])
+  @@index([year, month])
+}
+
+enum water_sources_type {
+  GROUNDWATER
+  SURFACE_WATER
+  TAP_WATER
+  INDUSTRIAL_ESTATE
+  RECYCLED
+  RAINWATER
+  OTHER
+}
+
+enum users_role {
+  ADMIN
+  ANALYST
+  VIEWER
+}
+
+enum mitigation_actions_status {
+  PLANNED
+  IN_PROGRESS
+  DONE
+  CANCELLED
+}
+
+enum risk_assessments_riskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+// ───────────────────────────────────────────────
+// ตารางของเว็บไซต์ WECCI (เพิ่มใหม่ ไม่กระทบตารางเดิม)
+// ───────────────────────────────────────────────
+
+/// เนื้อหาของแต่ละบล็อกในหน้าเว็บ แก้ไขได้จากหลังบ้าน
+/// data เก็บเป็น JSON เพื่อให้แต่ละบล็อกมีฟิลด์ต่างกันได้โดยไม่ต้องเพิ่มตาราง
+model cms_page_contents {
+  id        Int      @id @default(autoincrement())
+  page      String   @db.VarChar(64)
+  key       String   @db.VarChar(64)
+  data      Json
+  order     Int      @default(0)
+  enabled   Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+  updatedBy String?  @db.VarChar(64)
+
+  @@unique([page, key])
+  @@index([page])
+}
+
+/// ไฟล์รูปที่แอดมินอัปโหลดผ่านหลังบ้าน
+model cms_media_assets {
+  id           Int      @id @default(autoincrement())
+  path         String   @unique @db.VarChar(255)
+  originalName String   @db.VarChar(255)
+  width        Int
+  height       Int
+  bytes        Int
+  folder       String   @default("general") @db.VarChar(64)
+  createdAt    DateTime @default(now())
+
+  @@index([folder])
+}
+
+/// ข่าวสาร/กิจกรรมที่แสดงในปฏิทินหน้า /news แก้ไขได้จากหลังบ้าน
+model cms_events {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(300)
+  titleEn     String?   @db.VarChar(300)
+  /// คำโปรยสั้น ๆ ใต้ชื่อกิจกรรม
+  excerpt     String?   @db.Text
+  excerptEn   String?   @db.Text
+  /// รายละเอียดแบบบล็อก (หัวข้อ ข้อความ รูป ตาราง ลิงก์) เก็บเป็น JSON array
+  content     Json?
+  contentEn   Json?
+  /// อบรม | สัมมนา | ประชุม | ศึกษาดูงาน
+  category    String    @db.VarChar(40)
+  startDate   DateTime  @db.Date
+  /// วันสิ้นสุด ใส่เมื่อเป็นกิจกรรมหลายวัน
+  endDate     DateTime? @db.Date
+  time        String?   @db.VarChar(100)
+  place       String?   @db.VarChar(300)
+  placeEn     String?   @db.VarChar(300)
+  image       String?   @db.VarChar(255)
+  registerUrl String?   @db.VarChar(500)
+  /// ช่วงเปิดรับสมัคร ใช้บอกสถานะบนหน้ารายละเอียด
+  registerOpenAt  DateTime? @db.Date
+  registerCloseAt DateTime? @db.Date
+  published   Boolean   @default(true)
+  /// จำนวนครั้งที่หน้ารายละเอียดถูกเปิด
+  views       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  tags cms_event_tags[] @relation("EventTags")
+
+  @@index([startDate])
+}
+
+/// ป้ายกำกับกิจกรรม สร้างและแก้ไขได้จากหน้า "จัดการ Tags"
+model cms_event_tags {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(60)
+  nameEn    String?  @db.VarChar(60)
+  createdAt DateTime @default(now())
+
+  events cms_events[] @relation("EventTags")
+}
+
+/// ข้อความที่ส่งเข้ามาจากฟอร์มหน้าติดต่อ
+model cms_contact_messages {
+  id        Int      @id @default(autoincrement())
+  firstName String   @db.VarChar(100)
+  lastName  String   @db.VarChar(100)
+  email     String   @db.VarChar(150)
+  phone     String   @db.VarChar(50)
+  subject   String   @db.VarChar(200)
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+/// องค์ความรู้และวีดีโอที่แสดงในหน้า /news/knowledge
+model cms_knowledge_items {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(300)
+  description String?  @db.Text
+  /// เนื้อหาเต็มแบบบล็อก (หัวข้อ ข้อความ รูป ตาราง ลิงก์)
+  content     Json?
+  /// video | document | link
+  kind        String   @default("link") @db.VarChar(20)
+  /// ลิงก์ปลายทาง เช่น YouTube หรือไฟล์ PDF
+  url         String?  @db.VarChar(500)
+  /// ภาพปก ถ้าไม่ใส่จะใช้ภาพจาก YouTube ให้อัตโนมัติเมื่อเป็นวีดีโอ
+  image       String?  @db.VarChar(255)
+  published   Boolean  @default(true)
+  /// ตั้งเป็นไฮไลท์เพื่อดันขึ้นแถวบนสุดของหน้าองค์ความรู้
+  featured    Boolean  @default(false)
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+}
+
+/// บทความและข่าวประชาสัมพันธ์ที่แสดงในหน้า /news/articles
+model cms_articles {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(300)
+  /// เกริ่นนำใต้หัวข้อ
+  excerpt     String?  @db.Text
+  /// เนื้อหาเต็มแบบบล็อก (หัวข้อ ข้อความ รูป ตาราง ลิงก์)
+  content     Json?
+  /// หมวดหมู่ เช่น สิ่งแวดล้อม เศรษฐกิจ กฎหมาย
+  category    String   @default("ทั่วไป") @db.VarChar(60)
+  image       String?  @db.VarChar(255)
+  /// วันที่ลงบทความ ใช้เรียงลำดับและแสดงบนการ์ด
+  publishedAt DateTime @db.Date
+  published   Boolean  @default(true)
+  /// ตั้งเป็นไฮไลท์เพื่อขึ้นแท็บไฮไลท์บทความ
+  featured    Boolean  @default(false)
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([publishedAt])
+}
+
+/// โครงสร้างบุคลากรที่แสดงในหน้า /about/staff
+model cms_staff {
+  id         Int      @id @default(autoincrement())
+  /// ระดับในผังองค์กร ใช้จัดกลุ่มบนหน้าเว็บ
+  level      String   @default("เจ้าหน้าที่") @db.VarChar(60)
+  nameTh     String   @db.VarChar(200)
+  /// คอลัมน์เดิมที่เลิกใช้บนหน้าเว็บแล้ว เก็บไว้กันข้อมูลเก่าหาย
+  position   String?  @db.VarChar(200)
+  nameEn     String?  @db.VarChar(200)
+  duty       String?  @db.Text
+  phone      String?  @db.VarChar(50)
+  email      String?  @db.VarChar(150)
+  photo      String?  @db.VarChar(255)
+  /// ลำดับการแสดงผล ยิ่งน้อยยิ่งอยู่บน
+  sortOrder  Int      @default(0)
+  /// ให้เริ่มแถวใหม่บนหน้าเว็บ ใช้จัดกลุ่มสายงาน
+  newRow     Boolean  @default(false)
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([sortOrder])
+}

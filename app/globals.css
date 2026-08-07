@@ -2,25 +2,474 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+
+  /* ชุดสีถอดจากโลโก้ FTI WECCI โดยตรง
+     navy = ตัวอักษร FTI, aqua = ตัว W (น้ำ), mint = ใบไม้ (สิ่งแวดล้อม),
+     teal = ตัว CCI, red = สามเหลี่ยม ส.อ.ท. ใช้เป็นสีเน้นเท่านั้น */
+  /* ค่าสีสุ่มจากพิกเซลของไฟล์ public/images/brand/fti-wecci-light.png โดยตรง
+     จึงตรงกับโลโก้เป๊ะ ไม่ใช่ค่าที่กะเอา */
+  --wecci-navy: #223e99;
+  --wecci-blue: #1668bd;
+  --wecci-aqua: #00afe1;
+  --wecci-mint: #22b34c;
+  --wecci-teal: #2e728c;
+  --wecci-red: #e81529;
+  --wecci-sand: #f1f6fc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-wecci-navy: var(--wecci-navy);
+  --color-wecci-blue: var(--wecci-blue);
+  --color-wecci-aqua: var(--wecci-aqua);
+  --color-wecci-mint: var(--wecci-mint);
+  --color-wecci-teal: var(--wecci-teal);
+  --color-wecci-red: var(--wecci-red);
+  --color-wecci-sand: var(--wecci-sand);
+
+  --font-sans: var(--font-thai-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-thai-sans), system-ui, sans-serif;
+}
+
+/* เว็บภาษาไทยอ่านง่ายขึ้นเมื่อ line-height สูงกว่าค่าปกติ */
+p,
+li {
+  line-height: 1.85;
+}
+
+@keyframes wecci-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.wecci-fade-up {
+  animation: wecci-fade-up 0.6s ease-out both;
+}
+
+/* Ken Burns — ภาพแบนเนอร์ซูมพร้อมแพนช้า ๆ วนไปเรื่อย ๆ แล้วคืนที่เดิม
+   ใช้ scale สูงสุด 1.12 และเลื่อนไม่เกิน 2% จึงไม่มีขอบภาพโผล่ */
+@keyframes wecci-ken-burns {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate3d(-2%, -1.5%, 0);
+  }
+  100% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+}
+
+.wecci-ken-burns {
+  animation: wecci-ken-burns 32s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ก้อนแสงลอยช้า ๆ ใช้ตกแต่งการ์ดสีเข้ม */
+@keyframes wecci-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-12px, 14px, 0);
+  }
+}
+
+@keyframes wecci-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ใบพัดกังหันลม หมุนสม่ำเสมอไม่มีจังหวะเร่ง */
+.wecci-spin {
+  animation: wecci-spin 20s linear infinite;
+}
+
+@keyframes wecci-cloud-drift {
+  from {
+    transform: translateX(-20vw);
+  }
+  to {
+    transform: translateX(120vw);
+  }
+}
+
+/* ก้อนเมฆลอยข้ามจอช้ามาก ใช้เป็นฉากหลังส่วนบน */
+.wecci-cloud {
+  animation: wecci-cloud-drift linear infinite;
+}
+
+@keyframes wecci-tab-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* เนื้อหาแท็บเลื่อนขึ้นตอนสลับ ใช้คู่กับ key={activeTab} ให้เล่นซ้ำทุกครั้ง */
+.wecci-tab-in {
+  animation: wecci-tab-in 0.35s ease-out forwards;
+}
+
+/* แสงกวาดผ่านการ์ดตอนเอาเมาส์ชี้ */
+.wecci-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wecci-shine:hover::after {
+  transform: translateX(120%);
+}
+
+.wecci-float {
+  animation: wecci-float 12s ease-in-out infinite;
+}
+
+/* คลื่นเลื่อนแนวนอนช้า ๆ — ใช้ซ้อนหลายชั้นให้ดูเหมือนผิวน้ำไหว */
+@keyframes wecci-wave-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.wecci-wave {
+  width: 200%;
+  animation: wecci-wave-drift linear infinite;
+}
+
+/* ฟองอากาศลอยขึ้นแล้วจางหาย */
+@keyframes wecci-bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -160px, 0) scale(1);
+    opacity: 0;
+  }
+}
+
+.wecci-bubble {
+  animation: wecci-bubble-rise linear infinite;
+}
+
+/* วงระลอกน้ำแผ่ออก */
+@keyframes wecci-ripple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.wecci-ripple {
+  animation: wecci-ripple ease-out infinite;
+}
+
+/*
+  Tailwind v4 ไม่ใส่ cursor: pointer ให้ปุ่มอีกต่อไป (ใช้ค่าเริ่มต้นของเบราว์เซอร์คือลูกศร)
+  จึงกำหนดเองเพื่อให้ทุกปุ่มทั้งเว็บขึ้นรูปมือเวลาชี้
+*/
+button:not(:disabled),
+summary,
+select,
+label:has(> input[type="checkbox"]),
+[role="button"],
+[role="tab"] {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* เลื่อนแบบนุ่มเมื่อคลิกลิงก์ #anchor */
+html {
+  scroll-behavior: smooth;
+  /* เว้นที่ให้เฮดเดอร์ที่ลอยอยู่ เวลาเลื่อนไปหยุดที่ต้นแบนด์ */
+  scroll-padding-top: 5rem;
+}
+
+/*
+  หน้าที่แบ่งเนื้อหาเป็นแบนด์ — เลื่อนหนึ่งครั้งไปหยุดที่แบนด์ถัดไปพอดี
+  scroll-snap-stop: always กันไม่ให้เลื่อนแรง ๆ แล้วข้ามแบนด์
+*/
+.wecci-snap {
+  scroll-snap-type: y mandatory;
+}
+
+.wecci-snap > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wecci-snap {
+    scroll-snap-type: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .wecci-fade-up,
+  .wecci-ken-burns,
+  .wecci-float,
+  .wecci-spin,
+  .wecci-cloud,
+  .wecci-tab-in,
+  .wecci-underline-expand,
+  .wecci-shimmer,
+  .wecci-pulse-glow,
+  .wecci-page-in,
+  .wecci-wave,
+  .wecci-bubble,
+  .wecci-ripple {
+    animation: none;
+  }
+}
+
+/*
+  Tailwind v4 เปลี่ยนเคอร์เซอร์ของปุ่มเป็นลูกศรตามค่าเริ่มต้นของเบราว์เซอร์
+  ดึงกลับมาเป็นรูปนิ้วมือให้ทุกอย่างที่กดได้ทั้งเว็บ จะได้รู้ว่ากดได้
+*/
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+summary,
+label[for],
+select,
+input[type="checkbox"],
+input[type="radio"],
+input[type="file"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+/* ขยับขึ้นลงเบา ๆ บอกว่ากดได้ ใช้กับลิงก์พาไปหัวข้อถัดไป */
+@keyframes wecci-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.wecci-nudge {
+  animation: wecci-nudge 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wecci-nudge {
+    animation: none;
+  }
+}
+
+/* จุดแสงวิ่งลงตามเส้นเชื่อมชั้นของผังองค์กร — วิ่งสองรอบแล้วหยุด ไม่กวนสายตา */
+@keyframes wecci-spark-down {
+  0% {
+    top: -0.25rem;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 0.25rem);
+    opacity: 0;
+  }
+}
+
+.wecci-spark {
+  /* หน่วงรอให้เส้นยืดเสร็จก่อน จะได้ไม่วิ่งตอนเส้นยังถูกย่อ แล้ววิ่งรอบเดียวจบ */
+  animation: wecci-spark-down 1.6s ease-in-out 0.6s 1 both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wecci-spark {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ปุ่มหลักทรงแคปซูล — จุดขาวเล็กด้านซ้ายขยายเต็มปุ่มตอนชี้ แล้วตัวอักษรกลับเป็นสีแบรนด์ */
+.wecci-pill {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--wecci-blue) 0%, var(--wecci-navy) 70%);
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.wecci-pill::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 1.1rem;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #ffffff;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.wecci-pill:hover {
+  color: var(--wecci-navy);
+  box-shadow: 0 6px 18px rgba(22, 53, 124, 0.35);
+}
+
+.wecci-pill:hover::before {
+  transform: translateY(-50%) scale(100);
+}
+
+/* แสงวาบพาดผ่านเป็นระยะ ใช้กับป้ายหรือแบนเนอร์ที่อยากให้สะดุดตา */
+@keyframes wecci-shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-20deg);
+  }
+  15%,
+  100% {
+    transform: translateX(200%) skewX(-20deg);
+  }
+}
+
+.wecci-shimmer {
+  animation: wecci-shimmer 10s ease-in-out infinite;
+}
+
+/* จุดกะพริบ ใช้กับป้ายสถานะที่กำลังเกิดขึ้น */
+@keyframes wecci-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+}
+
+.wecci-pulse-glow {
+  animation: wecci-pulse-glow 2s ease-in-out infinite;
+}
+
+/* เนื้อหาเปลี่ยนหน้าเลื่อนขึ้นมาแทนการกระโดด */
+@keyframes wecci-page-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wecci-page-in {
+  animation: wecci-page-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Mobile performance ──
+   อนิเมชันที่วิ่งไม่หยุด (เมฆ กังหัน คลื่น ฟองอากาศ) กิน GPU สูงบนเครื่องสเปคต่ำ
+   จอเล็กจึงหยุดไว้ทั้งหมด และตัด backdrop-filter ที่แพงพอกัน */
+@media (max-width: 768px) {
+  .wecci-float,
+  .wecci-spin,
+  .wecci-cloud,
+  .wecci-wave,
+  .wecci-bubble,
+  .wecci-ripple,
+  .wecci-shimmer,
+  .wecci-pulse-glow {
+    animation: none;
+  }
+
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* เส้นใต้หัวข้อยืดออกตอนเลื่อนมาถึง */
+@keyframes wecci-underline-expand {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--wecci-underline-width, 4rem);
+  }
+}
+
+.wecci-underline-expand {
+  animation: wecci-underline-expand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

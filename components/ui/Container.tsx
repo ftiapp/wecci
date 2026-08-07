@@ -1,0 +1,21 @@
+import type { ReactNode } from "react";
+
+/**
+ * ความกว้างหลักของเว็บ — เต็มจอมากขึ้นบนจอใหญ่ (สูงสุด 1760px)
+ * แก้ที่นี่จุดเดียวแล้วมีผลกับทุกเซกชัน
+ */
+export function Container({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`mx-auto w-full max-w-[1760px] px-5 sm:px-8 lg:px-12 xl:px-16 ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
