@@ -21,6 +21,8 @@ export default function Page() {
       <PageHero
         title="วิสัยทัศน์และพันธกิจ"
         description="ทิศทางการดำเนินงานและพันธกิจหลักขององค์กร"
+        image="/vission/magnific__upload__35668.png"
+        imageAlt="วิสัยทัศน์และพันธกิจขององค์กร"
         breadcrumb={[
           { label: "เกี่ยวกับเรา", href: "/about" },
           { label: "วิสัยทัศน์และพันธกิจ", href: "/about/vision" },
