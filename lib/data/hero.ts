@@ -24,8 +24,8 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "ปรึกษาผู้เชี่ยวชาญ",
     ctaHref: "/contact",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
-    image: "/images/hero/globe.webp",
-    imageAlt: "ต้นไม้บนลูกโลกและกังหันลม สื่อถึงสิ่งแวดล้อมและสภาพภูมิอากาศ",
+    image: "/images/hero/sprout.webp",
+    imageAlt: "ต้นกล้าเขียวงอกจากหยดน้ำ สื่อถึงการใช้ทรัพยากรน้ำอย่างยั่งยืน",
     overlay: "bg-gradient-to-r from-black/70 via-black/35 to-transparent",
   },
   {
