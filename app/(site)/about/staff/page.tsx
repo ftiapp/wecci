@@ -37,8 +37,8 @@ export default async function StaffPage() {
       <PageHero
         title="โครงสร้างบุคลากร"
         description="บุคคลากรประจำสถาบันน้ำ สิ่งแวดล้อม และ Climate Change"
-        image="/images/about/staff-hero-v5.webp"
-        imageAlt="ทีมงานสถาบันน้ำ สิ่งแวดล้อม และ Climate Change"
+        image="/images/about/staff-hero-v6.webp"
+        imageAlt="ผู้คนยืนอยู่บนเนินเขาสีเขียวหน้าเมืองใหญ่ สื่อถึงทีมงานที่เชื่อมภาคอุตสาหกรรมกับสิ่งแวดล้อม"
         breadcrumb={[
           { label: "เกี่ยวกับเรา" },
           { label: "โครงสร้างบุคลากร", href: "/about/staff" },
