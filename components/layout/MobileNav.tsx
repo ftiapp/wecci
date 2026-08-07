@@ -44,33 +44,33 @@ export function MobileNav({ solid = true }: { solid?: boolean }) {
               const isOpen = expanded === item.href;
               return (
                 <li key={item.href} className="py-1">
-                  <div className="flex items-center justify-between">
+                  {/* มีเมนูย่อย = กดแล้วกางอย่างเดียว, ไม่มีเมนูย่อยจึงจะเป็นลิงก์ */}
+                  {item.children ? (
+                    <button
+                      type="button"
+                      onClick={() => setExpanded(isOpen ? null : item.href)}
+                      aria-expanded={isOpen}
+                      className="flex w-full items-center justify-between py-3 text-left text-sm font-semibold text-wecci-navy"
+                    >
+                      {item.label}
+                      <svg
+                        viewBox="0 0 12 12"
+                        className={`h-3 w-3 text-slate-400 transition ${isOpen ? "rotate-180" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        aria-hidden
+                      >
+                        <path d="m3 4.5 3 3 3-3" strokeWidth={1.8} strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  ) : (
                     <Link
                       href={item.href}
-                      className="block flex-1 py-3 text-sm font-semibold text-wecci-navy"
+                      className="block py-3 text-sm font-semibold text-wecci-navy"
                     >
                       {item.label}
                     </Link>
-                    {item.children && (
-                      <button
-                        type="button"
-                        onClick={() => setExpanded(isOpen ? null : item.href)}
-                        aria-expanded={isOpen}
-                        className="p-3 text-slate-400"
-                      >
-                        <span className="sr-only">แสดงเมนูย่อยของ {item.label}</span>
-                        <svg
-                          viewBox="0 0 12 12"
-                          className={`h-3 w-3 transition ${isOpen ? "rotate-180" : ""}`}
-                          fill="none"
-                          stroke="currentColor"
-                          aria-hidden
-                        >
-                          <path d="m3 4.5 3 3 3-3" strokeWidth={1.8} strokeLinecap="round" />
-                        </svg>
-                      </button>
-                    )}
-                  </div>
+                  )}
 
                   {item.children && isOpen && (
                     <ul className="mb-2 space-y-1 rounded-xl bg-wecci-sand p-2">

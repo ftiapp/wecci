@@ -67,31 +67,22 @@ export function DesktopNav({
             }
 
             /*
-              แยกสองส่วน: กดที่ชื่อเมนู = ไปหน้านั้นทันที
-              กด (หรือชี้) ที่ลูกศร = กางเมกะเมนูเลือกหัวข้อย่อย
+              กดที่ชื่อเมนู = กางเมกะเมนูอย่างเดียว ไม่พาไปไหน
+              จะเปลี่ยนหน้าได้ก็ต่อเมื่อเลือกหัวข้อย่อยในแผงที่กางออกมา
             */
             return (
               <li key={item.href} className="relative flex items-center">
-                <Link
-                  href={item.href}
-                  className={`py-6 pl-3 pr-1 text-sm font-semibold transition ${
-                    isOpen ? "text-wecci-blue" : idleText
-                  }`}
-                >
-                  {item.label}
-                </Link>
-
                 <button
                   type="button"
                   aria-expanded={isOpen}
                   aria-controls="mega-menu-panel"
-                  aria-label={`เปิดหัวข้อย่อยของ ${item.label}`}
                   onClick={() => onOpenChange(isOpen ? null : item.href)}
                   onMouseEnter={() => onOpenChange(item.href)}
-                  className={`py-6 pl-1 pr-3 transition ${
+                  className={`flex items-center gap-1 px-3 py-6 text-sm font-semibold transition ${
                     isOpen ? "text-wecci-blue" : idleText
                   }`}
                 >
+                  {item.label}
                   <svg
                     viewBox="0 0 12 12"
                     className={`h-3 w-3 transition ${isOpen ? "rotate-180" : ""}`}
