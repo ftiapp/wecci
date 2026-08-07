@@ -24,7 +24,7 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "ปรึกษาผู้เชี่ยวชาญ",
     ctaHref: "/contact",
     gradient: "from-wecci-navy via-wecci-teal to-wecci-aqua",
-    image: "/images/hero/sprout-v2.webp",
+    image: "/images/hero/sprout-v3.webp",
     imageAlt: "ต้นกล้าเขียวงอกจากหยดน้ำ สื่อถึงการใช้ทรัพยากรน้ำอย่างยั่งยืน",
   },
   {

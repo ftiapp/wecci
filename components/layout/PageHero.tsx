@@ -17,7 +17,7 @@ export function PageHero({
   gradient = "from-wecci-navy via-wecci-blue to-wecci-aqua",
   /* ข้อความมีแถบสีรองของตัวเองแล้ว ตรงนี้จึงเหลือแค่เงาบาง ๆ ไม่ย้อมสีรูป */
   overlay = "bg-gradient-to-t from-black/30 via-transparent to-transparent",
-  zoom = true,
+  zoom = false,
 }: {
   eyebrow?: string;
   title: string;
@@ -41,8 +41,8 @@ export function PageHero({
         overlay={overlay}
         priority
         zoom={zoom}
-        /* แบนเนอร์เต็มจอโดนซูมเข้า ใช้ 75 แล้วขอบภาพจะแตกให้เห็น */
-        quality={88}
+        /* แบนเนอร์เต็มจอต้องคมที่สุด ไม่ยอมให้ขั้นตอน optimize บีบซ้ำอีก */
+        quality={100}
       />
 
       <Container className="relative z-10 pb-16 pt-40 sm:pb-20">
