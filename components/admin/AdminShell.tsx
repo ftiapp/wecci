@@ -47,7 +47,7 @@ export async function AdminShell({
         ...pageLink("about-institute"),
         ...pageLink("about-vision"),
         ...pageLink("about-strategy"),
-        ...pageLink("about-executives"),
+        { href: "/admin/executives", label: "โครงสร้างผู้บริหาร" },
         { href: "/admin/staff", label: "โครงสร้างบุคลากร" },
       ],
     },

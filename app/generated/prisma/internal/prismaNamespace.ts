@@ -410,6 +410,7 @@ export const ModelName = {
   cms_contact_messages: 'cms_contact_messages',
   cms_knowledge_items: 'cms_knowledge_items',
   cms_articles: 'cms_articles',
+  cms_executive: 'cms_executive',
   cms_staff: 'cms_staff'
 } as const
 
@@ -426,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "factories" | "mitigation_actions" | "risk_assessments" | "users" | "water_sources" | "water_usages" | "cms_page_contents" | "cms_media_assets" | "cms_events" | "cms_event_tags" | "cms_contact_messages" | "cms_knowledge_items" | "cms_articles" | "cms_staff"
+    modelProps: "factories" | "mitigation_actions" | "risk_assessments" | "users" | "water_sources" | "water_usages" | "cms_page_contents" | "cms_media_assets" | "cms_events" | "cms_event_tags" | "cms_contact_messages" | "cms_knowledge_items" | "cms_articles" | "cms_executive" | "cms_staff"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1288,6 +1289,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    cms_executive: {
+      payload: Prisma.$cms_executivePayload<ExtArgs>
+      fields: Prisma.cms_executiveFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.cms_executiveFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.cms_executiveFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>
+        }
+        findFirst: {
+          args: Prisma.cms_executiveFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.cms_executiveFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>
+        }
+        findMany: {
+          args: Prisma.cms_executiveFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>[]
+        }
+        create: {
+          args: Prisma.cms_executiveCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>
+        }
+        createMany: {
+          args: Prisma.cms_executiveCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.cms_executiveDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>
+        }
+        update: {
+          args: Prisma.cms_executiveUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>
+        }
+        deleteMany: {
+          args: Prisma.cms_executiveDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.cms_executiveUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.cms_executiveUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$cms_executivePayload>
+        }
+        aggregate: {
+          args: Prisma.Cms_executiveAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCms_executive>
+        }
+        groupBy: {
+          args: Prisma.cms_executiveGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Cms_executiveGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.cms_executiveCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Cms_executiveCountAggregateOutputType> | number
+        }
+      }
+    }
     cms_staff: {
       payload: Prisma.$cms_staffPayload<ExtArgs>
       fields: Prisma.cms_staffFieldRefs
@@ -1615,6 +1682,25 @@ export const Cms_articlesScalarFieldEnum = {
 export type Cms_articlesScalarFieldEnum = (typeof Cms_articlesScalarFieldEnum)[keyof typeof Cms_articlesScalarFieldEnum]
 
 
+export const Cms_executiveScalarFieldEnum = {
+  id: 'id',
+  level: 'level',
+  nameTh: 'nameTh',
+  position: 'position',
+  duty: 'duty',
+  org: 'org',
+  phone: 'phone',
+  email: 'email',
+  photo: 'photo',
+  sortOrder: 'sortOrder',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type Cms_executiveScalarFieldEnum = (typeof Cms_executiveScalarFieldEnum)[keyof typeof Cms_executiveScalarFieldEnum]
+
+
 export const Cms_staffScalarFieldEnum = {
   id: 'id',
   level: 'level',
@@ -1808,6 +1894,20 @@ export const cms_articlesOrderByRelevanceFieldEnum = {
 } as const
 
 export type cms_articlesOrderByRelevanceFieldEnum = (typeof cms_articlesOrderByRelevanceFieldEnum)[keyof typeof cms_articlesOrderByRelevanceFieldEnum]
+
+
+export const cms_executiveOrderByRelevanceFieldEnum = {
+  level: 'level',
+  nameTh: 'nameTh',
+  position: 'position',
+  duty: 'duty',
+  org: 'org',
+  phone: 'phone',
+  email: 'email',
+  photo: 'photo'
+} as const
+
+export type cms_executiveOrderByRelevanceFieldEnum = (typeof cms_executiveOrderByRelevanceFieldEnum)[keyof typeof cms_executiveOrderByRelevanceFieldEnum]
 
 
 export const cms_staffOrderByRelevanceFieldEnum = {
@@ -2077,6 +2177,7 @@ export type GlobalOmitConfig = {
   cms_contact_messages?: Prisma.cms_contact_messagesOmit
   cms_knowledge_items?: Prisma.cms_knowledge_itemsOmit
   cms_articles?: Prisma.cms_articlesOmit
+  cms_executive?: Prisma.cms_executiveOmit
   cms_staff?: Prisma.cms_staffOmit
 }
 

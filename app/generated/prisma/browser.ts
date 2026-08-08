@@ -84,6 +84,14 @@ export type cms_knowledge_items = Prisma.cms_knowledge_itemsModel
  */
 export type cms_articles = Prisma.cms_articlesModel
 /**
+ * Model cms_executive
+ * คณะผู้บริหารที่แสดงในหน้า /about/executives
+ * 
+ * แยกตารางจาก cms_staff เพราะเป็นคนละชุดคน และเก็บข้อมูลไม่เหมือนกัน
+ * ผู้บริหารต้องมีตำแหน่งเต็มกับหน่วยงานต้นสังกัด ซึ่งบุคลากรประจำไม่มี
+ */
+export type cms_executive = Prisma.cms_executiveModel
+/**
  * Model cms_staff
  * โครงสร้างบุคลากรที่แสดงในหน้า /about/staff
  */

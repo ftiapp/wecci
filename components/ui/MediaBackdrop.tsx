@@ -47,6 +47,9 @@ export function MediaBackdrop({
   */
   const effectiveSizes = zoom && sizes === "100vw" ? "115vw" : sizes;
 
+  const objectStyle = focus ? { objectPosition: focus } : undefined;
+  const imageClass = `object-cover ${zoom ? "wecci-ken-burns" : ""}`;
+
   return (
     <div className="absolute inset-0 -z-0 overflow-hidden" aria-hidden={!alt}>
       <div className={`absolute inset-0 bg-gradient-to-br ${gradient}`} />
@@ -60,8 +63,8 @@ export function MediaBackdrop({
           sizes={effectiveSizes}
           quality={quality}
           loading={loading}
-          style={focus ? { objectPosition: focus } : undefined}
-          className={`object-cover ${zoom ? "wecci-ken-burns" : ""}`}
+          style={objectStyle}
+          className={imageClass}
         />
       )}
 

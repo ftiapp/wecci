@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Thai } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
 
-const thaiSans = Noto_Sans_Thai({
+/*
+  FCVision — ฟอนต์ประจำแบรนด์ ไม่ได้อยู่บน Google Fonts จึงต้องฝังไฟล์มาเอง
+
+  ต้นฉบับที่ได้มาเป็น .ttf/.otf ครบ 20 น้ำหนัก แต่เว็บใช้จริงแค่ 4
+  (ปกติ กลาง กึ่งหนา หนา) จึงแปลงเฉพาะเท่านี้เป็น woff2 ซึ่งเล็กกว่า ttf ราวสี่เท่า
+  ไฟล์ละ 119KB เหลือ 32KB — ถ้าจะเพิ่มน้ำหนักอื่นให้แปลงเพิ่มแล้วมาประกาศตรงนี้
+
+  next/font/local จะ inline ตัว @font-face ให้ พร้อม preload ไฟล์ทั้งชุด
+  ไม่มีคำขอไปโดเมนภายนอก หน้าเว็บจึงไม่ต้องรอ DNS ของ Google Fonts
+*/
+const thaiSans = localFont({
+  src: [
+    { path: "./fonts/FCVision-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/FCVision-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/FCVision-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/FCVision-Bold.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-thai-sans",
-  subsets: ["thai", "latin"],
+  /* swap ให้ตัวอักษรขึ้นด้วยฟอนต์สำรองก่อน ดีกว่าปล่อยหน้าว่างระหว่างรอไฟล์ฟอนต์ */
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 /*

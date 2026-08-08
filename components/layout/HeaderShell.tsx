@@ -9,12 +9,16 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { siteConfig } from "@/lib/site-config";
 
 /**
- * เฮดเดอร์โปร่งใสตอนอยู่บนสุด (ทับภาพ hero) แล้วเปลี่ยนเป็นพื้นขาวเมื่อเลื่อนลง
+ * เฮดเดอร์โปร่งใสตอนอยู่บนสุด (ทับภาพ hero) แล้วเปลี่ยนเป็นพื้นเทาอ่อนเมื่อเลื่อนลง
  * ช่องทางติดต่อรวมอยู่แถวเดียวกับเมนู ไม่มีแถบบนสุดแยกอีก
+ *
+ * เลื่อนลงแล้วซ่อนตัวเอง เลื่อนขึ้นแล้วโผล่กลับมา — คนที่ตั้งใจอ่านเนื้อหาจะได้พื้นที่เต็มจอ
+ * แต่ยังเรียกเมนูกลับมาได้ทันทีโดยไม่ต้องเลื่อนขึ้นไปบนสุด
  */
 export function HeaderShell() {
   const [openHref, setOpenHref] = useState<string | null>(null);
   const [solid, setSolid] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -22,7 +26,37 @@ export function HeaderShell() {
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
+    let lastY = window.scrollY;
+    /* ระยะที่เลื่อนลงติดต่อกัน รีเซ็ตทุกครั้งที่เปลี่ยนไปเลื่อนขึ้น */
+    let downwards = 0;
+
+    /*
+      ต้องเลื่อนลงสะสมให้ครบเท่านี้ก่อนถึงจะซ่อนเมนู ราว ๆ สามครั้งของการหมุนล้อเมาส์
+      ถ้าซ่อนทันทีที่ขยับลงนิดเดียว เมนูจะวูบหายบ่อยจนรู้สึกว่าหน้าเว็บกระตุก
+    */
+    const HIDE_AFTER = 300;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+
+      setSolid(y > 40);
+
+      /* ขยับไม่ถึง 4px ถือว่าเป็นการสั่นของ trackpad ไม่ใช่เจตนาเลื่อน */
+      if (Math.abs(delta) <= 4) return;
+
+      if (delta > 0) {
+        downwards += delta;
+        /* ช่วงบนสุดของหน้าให้แสดงไว้เสมอ ไม่ว่าจะเลื่อนสะสมมาเท่าไร */
+        if (downwards > HIDE_AFTER && y > 120) setHidden(true);
+      } else {
+        /* เลื่อนขึ้นเมื่อไรให้กลับมาทันที ไม่ต้องรอสะสม — คนมักเลื่อนขึ้นเพราะจะกดเมนู */
+        downwards = 0;
+        setHidden(false);
+      }
+
+      lastY = y;
+    };
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -32,10 +66,17 @@ export function HeaderShell() {
   // เมนูที่กางอยู่ต้องมีพื้นทึบเสมอ ไม่งั้นอ่านไม่ออกตอนทับภาพ
   const opaque = solid || openHref !== null;
 
+  // กำลังกางเมนูอยู่ห้ามซ่อน ไม่งั้นเมนูหายไปทั้งที่ผู้ใช้เพิ่งกดเปิด
+  const away = hidden && openHref === null;
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        opaque ? "bg-white shadow-sm" : "bg-gradient-to-b from-black/45 to-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow] duration-300 ${
+        away ? "-translate-y-full" : "translate-y-0"
+      } ${
+        opaque
+          ? "bg-slate-100/95 shadow-sm backdrop-blur"
+          : "bg-gradient-to-b from-black/45 to-transparent"
       }`}
     >
       <Container className="flex h-20 items-center justify-between gap-4">

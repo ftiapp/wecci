@@ -25,7 +25,9 @@ export type PageDef = {
   label: string;
   href: string;
   blocks: BlockDef[];
-};export const pageDefs: PageDef[] = [
+};
+
+export const pageDefs: PageDef[] = [
   {
     slug: "about-institute",
     label: "เกี่ยวกับสถาบัน",
@@ -96,39 +98,6 @@ export type PageDef = {
     slug: "about-strategy",
     label: "กลยุทธ์",
     href: "/about/strategy",
-    blocks: [
-      {
-        key: "hero",
-        label: "แบนเนอร์หัวหน้า",
-        description: "ส่วนบนสุดของหน้า",
-        fields: [
-          { name: "title", label: "หัวข้อ", type: "text" },
-          { name: "description", label: "คำอธิบายใต้หัวข้อ", type: "textarea" },
-          {
-            name: "image",
-            label: "รูปพื้นหลัง",
-            type: "image",
-            help: "แนะนำแนวนอน กว้างอย่างน้อย 2000px",
-          },
-          { name: "imageAlt", label: "คำบรรยายรูป (สำหรับผู้พิการทางสายตา)", type: "text" },
-        ],
-      },
-      {
-        key: "section",
-        label: "หัวข้อเนื้อหา",
-        description: "หัวข้อและคำอธิบายของเซกชันเนื้อหา",
-        fields: [
-          { name: "eyebrow", label: "ป้ายเล็กเหนือหัวข้อ", type: "text" },
-          { name: "title", label: "หัวข้อเซกชัน", type: "text" },
-          { name: "description", label: "คำอธิบายเซกชัน", type: "textarea" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "about-executives",
-    label: "โครงสร้างผู้บริหาร",
-    href: "/about/executives",
     blocks: [
       {
         key: "hero",

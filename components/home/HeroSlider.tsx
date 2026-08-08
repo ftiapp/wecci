@@ -20,13 +20,22 @@ export function HeroSlider() {
   const [preloadRest, setPreloadRest] = useState(false);
 
   useEffect(() => {
+    /* รอให้วาดจอแรกเสร็จก่อนเสมอ ไม่งั้นจะไปเริ่มโหลดแย่งกับใบแรกที่ยังไม่มา */
+    let frame = 0;
+    const start = () => {
+      frame = requestAnimationFrame(() => setPreloadRest(true));
+    };
+
     if (document.readyState === "complete") {
-      setPreloadRest(true);
-      return;
+      start();
+    } else {
+      window.addEventListener("load", start);
     }
-    const onLoad = () => setPreloadRest(true);
-    window.addEventListener("load", onLoad);
-    return () => window.removeEventListener("load", onLoad);
+
+    return () => {
+      window.removeEventListener("load", start);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {

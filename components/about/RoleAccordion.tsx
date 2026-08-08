@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { withEmphasis } from "@/components/about/emphasis";
 
 type Role = {
@@ -22,29 +22,52 @@ type Role = {
  */
 export function RoleAccordion({ roles }: { roles: Role[] }) {
   const [active, setActive] = useState(0);
+  const panels = useRef<(HTMLButtonElement | null)[]>([]);
+
+  /*
+    จอเล็กแผงเรียงซ้อนกันบนลงล่าง กดเปิดใบหนึ่งแล้วจะยังเห็นขอบของใบอื่นค้างอยู่
+    จึงเลื่อนใบที่เพิ่งเปิดขึ้นไปชิดบนสุดให้ ผู้ใช้จะได้เห็นเต็มจอเหมือนเปลี่ยนหน้า
+    จอ lg ขึ้นไปแผงเรียงแนวนอนอยู่ในสายตาครบอยู่แล้ว เลื่อนไปก็มีแต่จะรบกวน
+  */
+  function open(index: number) {
+    setActive(index);
+    if (window.innerWidth >= 1024) return;
+
+    /* รอให้แผงขยายเสร็จก่อนค่อยเลื่อน ไม่งั้นจะเลื่อนไปยังตำแหน่งความสูงเดิม */
+    requestAnimationFrame(() => {
+      panels.current[index]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   return (
     // แผงเรียงชิดกันเป็นก้อนเดียว มุมโค้งอยู่ที่กรอบนอกเท่านั้น
     // สูงเกือบเต็มจอ และดันออกนอกกรอบเนื้อหาเล็กน้อยบนจอกว้าง ให้แผงดูใหญ่สมกับเป็นเนื้อหาหลัก
     <div className="flex flex-col overflow-hidden rounded-2xl shadow-xl shadow-wecci-navy/10 lg:h-[calc(100svh-14rem)] lg:min-h-[30rem] lg:flex-row xl:-mx-8 2xl:-mx-16">
       {roles.map((role, i) => {
-        const open = i === active;
+        const isOpen = i === active;
         const order = String(i + 1).padStart(2, "0");
 
         return (
           <button
             key={role.id}
+            ref={(node) => {
+              panels.current[i] = node;
+            }}
             type="button"
-            aria-expanded={open}
-            onClick={() => setActive(i)}
-            className={`group relative overflow-hidden text-left transition-all duration-700 ease-out ${
-              open
-                ? "flex-[6] bg-white"
+            aria-expanded={isOpen}
+            onClick={() => open(i)}
+            /*
+              scroll-mt เว้นที่ให้เฮดเดอร์ที่ลอยอยู่ ไม่งั้นหัวแผงจะไปมุดอยู่ใต้เมนู
+              จอเล็กบังคับความสูงขั้นต่ำเกือบเต็มจอ ใบที่เปิดจึงกินพื้นที่จนแทบไม่เหลือให้ใบอื่นโผล่
+            */
+            className={`group relative scroll-mt-20 overflow-hidden text-left transition-all duration-700 ease-out ${
+              isOpen
+                ? "min-h-[78svh] flex-[6] bg-white lg:min-h-0"
                 : "flex-[1] bg-gradient-to-b from-wecci-navy to-wecci-blue text-white hover:from-wecci-blue hover:to-wecci-navy lg:min-w-[7.5rem]"
             } ${i > 0 ? "border-t border-white/15 lg:border-t-0 lg:border-l" : ""}`}
           >
             {/* ภาพประกอบของแผงที่เปิด — กินครึ่งซ้าย แล้วไล่จางเป็นสีขาวก่อนถึงข้อความ */}
-            {open && role.image && (
+            {isOpen && role.image && (
               <span
                 className="pointer-events-none absolute inset-y-0 left-0 hidden w-[60%] lg:block"
                 aria-hidden
@@ -61,14 +84,21 @@ export function RoleAccordion({ roles }: { roles: Role[] }) {
               </span>
             )}
 
-            <span className="relative flex h-full w-full items-stretch">
+            {/*
+              จอเล็กเรียงบนลงล่าง จอ lg ขึ้นไปค่อยเรียงซ้ายไปขวา
+
+              เดิมเป็นแถวแนวนอนตลอด แถบชื่อจึงกินความกว้างฝั่งซ้ายไว้ตลอดเวลา
+              บนมือถือเหลือที่ให้ข้อความแค่ไม่กี่สิบพิกเซล ตัดคำเหลือบรรทัดละสองสามคำจนอ่านไม่รู้เรื่อง
+            */}
+            <span className="relative flex h-full w-full flex-col items-stretch lg:flex-row">
               {/*
-                แถบชื่อแนวตั้งอยู่ติดขอบซ้ายเสมอ ทั้งตอนยุบและตอนเปิด
+                แถบชื่อ — จอเล็กอยู่ด้านบนพาดเต็มความกว้าง
+                จอกว้างเป็นคอลัมน์แนวตั้งติดขอบซ้าย ทั้งตอนยุบและตอนเปิด
                 (เป็นคอลัมน์แยก ไม่ได้วางทับเนื้อหา จึงไม่มีตัวอักษรซ้อนกัน)
               */}
               <span
-                className={`flex shrink-0 items-center gap-3 p-5 lg:h-full lg:w-[6.5rem] lg:items-center lg:justify-center lg:p-0 lg:py-6 ${
-                  open
+                className={`flex shrink-0 items-center gap-3 px-5 pt-5 pb-3 lg:h-full lg:w-[6.5rem] lg:items-center lg:justify-center lg:px-0 lg:py-6 ${
+                  isOpen
                     ? role.image
                       ? // ภาพแสดงเฉพาะจอ lg ขึ้นไป จอเล็กจึงต้องเป็นตัวเข้มบนพื้นขาว
                         "text-wecci-navy lg:text-white lg:[text-shadow:0_2px_6px_rgba(0,0,0,0.5)]"
@@ -81,7 +111,7 @@ export function RoleAccordion({ roles }: { roles: Role[] }) {
                 <span className="flex items-center gap-5 lg:h-full lg:justify-center lg:rotate-180 lg:[writing-mode:vertical-rl]">
                   <span
                     className={`text-3xl font-bold lg:text-5xl ${
-                      open
+                      isOpen
                         ? role.image
                           ? "text-wecci-aqua lg:text-white/70"
                           : "text-wecci-aqua"
@@ -97,23 +127,27 @@ export function RoleAccordion({ roles }: { roles: Role[] }) {
                 </span>
               </span>
 
-              {open && (
+              {isOpen && (
                 <span
-                  className={`relative flex min-w-0 flex-1 flex-col justify-center py-6 pr-6 pl-1 sm:py-8 sm:pr-10 ${
+                  className={`relative flex min-w-0 flex-1 flex-col justify-center px-5 pb-7 sm:px-8 sm:pb-9 lg:py-8 lg:pr-10 lg:pl-1 ${
                     // เว้นที่ให้ภาพครึ่งซ้าย ข้อความจึงเริ่มหลังจุดที่ภาพจางหมดแล้ว
                     role.image ? "lg:ml-[52%]" : ""
                   }`}
                 >
-                  {/* คำลายน้ำตัวใหญ่ที่มุมล่าง */}
-                  {/* คำลายน้ำเป็นตัวโปร่ง เห็นแค่เส้นขอบ */}
+                  {/*
+                    คำลายน้ำตัวโปร่งที่มุมล่าง เห็นแค่เส้นขอบ
+                    ซ่อนบนมือถือ เพราะพื้นที่แคบจนมันไปทับบรรทัดสุดท้ายของเนื้อหา
+                    กลายเป็นตัวอักษรซ้อนกันสองชั้นจนอ่านยาก
+                  */}
                   <span
-                    className="pointer-events-none absolute right-4 bottom-0 text-5xl font-bold text-transparent select-none [-webkit-text-stroke:1.5px_rgba(34,62,153,0.18)] sm:text-7xl"
+                    className="pointer-events-none absolute right-4 bottom-0 hidden text-5xl font-bold text-transparent select-none [-webkit-text-stroke:1.5px_rgba(34,62,153,0.18)] sm:block sm:text-7xl"
                     aria-hidden
                   >
                     {role.watermark}
                   </span>
 
-                  <span className="relative block max-w-3xl text-lg leading-loose text-slate-600 xl:text-xl xl:leading-loose">
+                  {/* จอเล็กลดขนาดลงหนึ่งขั้น ได้จำนวนคำต่อบรรทัดมากขึ้น อ่านต่อเนื่องกว่า */}
+                  <span className="relative block max-w-3xl text-base leading-loose text-slate-600 sm:text-lg lg:leading-loose xl:text-xl xl:leading-loose">
                     {withEmphasis(role.detail, role.emphasis)}
                   </span>
                 </span>

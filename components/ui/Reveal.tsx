@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
  * ค่อย ๆ ปรากฏขึ้นเมื่อเลื่อนมาถึง
- * เคลื่อนไหวครั้งเดียวแล้วหยุด ไม่วิ่งซ้ำไปมาจนลายตา
+ * ปกติเคลื่อนไหวครั้งเดียวแล้วหยุด ไม่วิ่งซ้ำไปมาจนลายตา
  * และปิดอัตโนมัติเมื่อผู้ใช้ตั้งค่าลดการเคลื่อนไหวในระบบ
  */
 export function Reveal({
@@ -13,6 +13,7 @@ export function Reveal({
   className = "",
   distance = 24,
   fade = false,
+  repeat = false,
 }: {
   children: ReactNode;
   /** หน่วงเป็นมิลลิวินาที ใช้ไล่ลำดับการปรากฏของรายการ */
@@ -22,6 +23,13 @@ export function Reveal({
   distance?: number;
   /** จาง ๆ เข้ามาด้วย ใช้เฉพาะจุดที่เนื้อหาไม่ใช่ข้อมูลหลักของหน้า */
   fade?: boolean;
+  /**
+   * เล่นใหม่ทุกครั้งที่เลื่อนออกแล้วกลับเข้ามา ทั้งขาลงและขาขึ้น
+   *
+   * ค่าตั้งต้นปิดไว้เพราะหน้าที่มีเนื้อหายาว ๆ จะขยับตลอดเวลาจนอ่านยาก
+   * เปิดเฉพาะหน้าที่เป็นแกลเลอรีรูปซึ่งการขยับช่วยให้ดูมีชีวิต
+   */
+  repeat?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
@@ -39,7 +47,11 @@ export function Reveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setShown(true);
-          observer.disconnect();
+          /* โหมดเล่นครั้งเดียว: เลิกเฝ้าทันทีที่โผล่ครบ จะได้ไม่กินแรงต่อ */
+          if (!repeat) observer.disconnect();
+        } else if (repeat) {
+          /* หลุดออกนอกจอแล้วรีเซ็ตกลับไปตั้งต้น รอบหน้าที่เลื่อนกลับมาจะได้เล่นใหม่ */
+          setShown(false);
         }
       },
       { rootMargin: "0px 0px -12% 0px", threshold: 0.15 },
@@ -47,7 +59,7 @@ export function Reveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [repeat]);
 
   return (
     <div

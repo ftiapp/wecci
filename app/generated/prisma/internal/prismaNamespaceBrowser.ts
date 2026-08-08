@@ -64,6 +64,7 @@ export const ModelName = {
   cms_contact_messages: 'cms_contact_messages',
   cms_knowledge_items: 'cms_knowledge_items',
   cms_articles: 'cms_articles',
+  cms_executive: 'cms_executive',
   cms_staff: 'cms_staff'
 } as const
 
@@ -305,6 +306,25 @@ export const Cms_articlesScalarFieldEnum = {
 export type Cms_articlesScalarFieldEnum = (typeof Cms_articlesScalarFieldEnum)[keyof typeof Cms_articlesScalarFieldEnum]
 
 
+export const Cms_executiveScalarFieldEnum = {
+  id: 'id',
+  level: 'level',
+  nameTh: 'nameTh',
+  position: 'position',
+  duty: 'duty',
+  org: 'org',
+  phone: 'phone',
+  email: 'email',
+  photo: 'photo',
+  sortOrder: 'sortOrder',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type Cms_executiveScalarFieldEnum = (typeof Cms_executiveScalarFieldEnum)[keyof typeof Cms_executiveScalarFieldEnum]
+
+
 export const Cms_staffScalarFieldEnum = {
   id: 'id',
   level: 'level',
@@ -498,6 +518,20 @@ export const cms_articlesOrderByRelevanceFieldEnum = {
 } as const
 
 export type cms_articlesOrderByRelevanceFieldEnum = (typeof cms_articlesOrderByRelevanceFieldEnum)[keyof typeof cms_articlesOrderByRelevanceFieldEnum]
+
+
+export const cms_executiveOrderByRelevanceFieldEnum = {
+  level: 'level',
+  nameTh: 'nameTh',
+  position: 'position',
+  duty: 'duty',
+  org: 'org',
+  phone: 'phone',
+  email: 'email',
+  photo: 'photo'
+} as const
+
+export type cms_executiveOrderByRelevanceFieldEnum = (typeof cms_executiveOrderByRelevanceFieldEnum)[keyof typeof cms_executiveOrderByRelevanceFieldEnum]
 
 
 export const cms_staffOrderByRelevanceFieldEnum = {

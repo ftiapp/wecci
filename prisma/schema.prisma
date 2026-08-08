@@ -286,6 +286,33 @@ model cms_articles {
   @@index([publishedAt])
 }
 
+/// คณะผู้บริหารที่แสดงในหน้า /about/executives
+///
+/// แยกตารางจาก cms_staff เพราะเป็นคนละชุดคน และเก็บข้อมูลไม่เหมือนกัน
+/// ผู้บริหารต้องมีตำแหน่งเต็มกับหน่วยงานต้นสังกัด ซึ่งบุคลากรประจำไม่มี
+model cms_executive {
+  id        Int      @id @default(autoincrement())
+  /// ระดับในคณะผู้บริหาร ใช้จัดกลุ่มบนหน้าเว็บ
+  level     String   @default("กรรมการ") @db.VarChar(60)
+  nameTh    String   @db.VarChar(200)
+  /// ตำแหน่งเต็มตามที่ใช้ในเอกสารทางการ
+  position  String?  @db.VarChar(200)
+  /// งานที่กำกับดูแล เช่น "งานด้านกลยุทธ์ แผนงาน และกฎหมาย"
+  duty      String?  @db.VarChar(300)
+  /// หน่วยงานหรือบริษัทต้นสังกัด
+  org       String?  @db.VarChar(200)
+  phone     String?  @db.VarChar(50)
+  email     String?  @db.VarChar(150)
+  photo     String?  @db.VarChar(255)
+  /// ลำดับการแสดงผล ยิ่งน้อยยิ่งอยู่บน
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
 /// โครงสร้างบุคลากรที่แสดงในหน้า /about/staff
 model cms_staff {
   id         Int      @id @default(autoincrement())
